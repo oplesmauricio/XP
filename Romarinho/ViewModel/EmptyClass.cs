@@ -3,7 +3,7 @@
 //using System.ComponentModel;
 //using System.Net.WebSockets;
 
-//namespace Romarinho.ViewModel
+//namespace Romarinho.App.ViewModel
 //{
 //    public sealed class ChatPageViewModel : INotifyPropertyChanged
 //    {

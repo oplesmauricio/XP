@@ -1,13 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Romarinho.Services;
+using Romarinho.App.Services;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Net.WebSockets;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace Romarinho.ViewModel;
+namespace Romarinho.App.ViewModel;
 
 public partial class WSViewModel : ObservableObject
 {

@@ -1,6 +1,6 @@
-﻿using Romarinho.ViewModel;
+﻿using Romarinho.App.ViewModel;
 
-namespace Romarinho;
+namespace Romarinho.App;
 
 public static class MauiProgram
 {

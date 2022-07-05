@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Romarinho.Services
+namespace Romarinho.App.Services
 {
     //public class WebSocketSimpleDemo
     //{

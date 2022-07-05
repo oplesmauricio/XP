@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
-namespace Romarinho.ViewModel;
+namespace Romarinho.App.ViewModel;
 
 [QueryProperty("Text", "Text")]
 public partial class DetailViewModel : ObservableObject
