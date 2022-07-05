@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Romarinho.Model
+namespace Romarinho.App.Model
 {
     public class Ordem
     {

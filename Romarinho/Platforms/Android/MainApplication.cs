@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace Romarinho;
+namespace Romarinho.App;
 
 [Application]
 public class MainApplication : MauiApplication

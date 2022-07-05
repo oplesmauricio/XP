@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace Romarinho;
+namespace Romarinho.App;
 
 public class Program
 {

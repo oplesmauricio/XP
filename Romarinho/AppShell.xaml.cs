@@ -1,4 +1,4 @@
-﻿namespace Romarinho;
+﻿namespace Romarinho.App;
 
 public partial class AppShell : Shell
 {

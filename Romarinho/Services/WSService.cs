@@ -2,7 +2,7 @@
 //using System.Net.WebSockets;
 //using System.Text;
 
-//namespace Romarinho.Services
+//namespace Romarinho.App.Services
 //{
 //    public class WSService
 //    {

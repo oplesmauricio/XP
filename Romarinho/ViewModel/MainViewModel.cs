@@ -3,7 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
-namespace Romarinho.ViewModel;
+namespace Romarinho.App.ViewModel;
 
 public partial class MainViewModel : ObservableObject
 {
