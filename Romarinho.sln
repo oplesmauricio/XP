@@ -8,9 +8,19 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1BDD3100-14A7-4C9C-B3A3-3C6130BFECF7}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		docker-compose.yml = docker-compose.yml
+		docker-compose.debug.yml = docker-compose.debug.yml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Romarinho.Socket", "Romarinho.Socket\Romarinho.Socket.csproj", "{43289EDB-5A0A-4DB7-B6E6-4EA14E30ADBF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Romarinho.Api", "Romarinho.Api\Romarinho.Api.csproj", "{796C25AA-FAB7-4C3C-9381-49C1E335822E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Romarinho.Domain", "Romarinho.Domain\Romarinho.Domain.csproj", "{EA36E0AF-5ED7-49E5-8581-EEFE1274CFA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Romarinho.Repository", "Romarinho.Repository\Romarinho.Repository.csproj", "{DF53E524-AAAF-4702-9CA9-9746AE3E8B97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Romarinho.Application", "Romarinho.Application\Romarinho.Application.csproj", "{9188C35B-8452-4FF0-8F35-E227636E7A30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,6 +38,22 @@ Global
 		{43289EDB-5A0A-4DB7-B6E6-4EA14E30ADBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43289EDB-5A0A-4DB7-B6E6-4EA14E30ADBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43289EDB-5A0A-4DB7-B6E6-4EA14E30ADBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{796C25AA-FAB7-4C3C-9381-49C1E335822E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{796C25AA-FAB7-4C3C-9381-49C1E335822E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{796C25AA-FAB7-4C3C-9381-49C1E335822E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{796C25AA-FAB7-4C3C-9381-49C1E335822E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA36E0AF-5ED7-49E5-8581-EEFE1274CFA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA36E0AF-5ED7-49E5-8581-EEFE1274CFA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA36E0AF-5ED7-49E5-8581-EEFE1274CFA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA36E0AF-5ED7-49E5-8581-EEFE1274CFA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF53E524-AAAF-4702-9CA9-9746AE3E8B97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF53E524-AAAF-4702-9CA9-9746AE3E8B97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF53E524-AAAF-4702-9CA9-9746AE3E8B97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF53E524-AAAF-4702-9CA9-9746AE3E8B97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9188C35B-8452-4FF0-8F35-E227636E7A30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9188C35B-8452-4FF0-8F35-E227636E7A30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9188C35B-8452-4FF0-8F35-E227636E7A30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9188C35B-8452-4FF0-8F35-E227636E7A30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
