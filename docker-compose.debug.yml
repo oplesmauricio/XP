@@ -3,6 +3,17 @@
 version: '3.4'
 
 services:
+  romarinhoapi:
+    image: romarinhoapi
+    build:
+      context: .
+      dockerfile: Romarinho.Api/Dockerfile
+    ports:
+      - 5001:5001
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - ~/.vsdbg:/remote_debugger:rw
   romarinhosocket:
     image: romarinhosocket
     build:

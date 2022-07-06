@@ -3,6 +3,13 @@
 version: '3.4'
 
 services:
+  romarinhoapi:
+    image: romarinhoapi
+    build:
+      context: .
+      dockerfile: Romarinho.Api/Dockerfile
+    ports:
+      - 5001:5001
   romarinhosocket:
     image: romarinhosocket
     build:

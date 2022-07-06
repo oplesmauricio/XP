@@ -19,6 +19,7 @@ public partial class MinhasOrdensViewModel : ObservableObject
         this.connectivity = connectivity;
         this._service = service;
         this._contexto = contexto;
+        this.minhasOrdens = new ObservableCollection<Ordem>();
     }
 
     internal async Task BuscarOrdens()
@@ -31,7 +32,7 @@ public partial class MinhasOrdensViewModel : ObservableObject
             }
             else
             {
-                var requisicao = await _service.BuscarOrdens(_contexto.UsuarioLogado.Id);
+                var requisicao = await _service.BuscarOrdensPorUsuario(_contexto.UsuarioLogado.Id);
 
                 if (requisicao.Sucesso)
                 {
@@ -46,7 +47,7 @@ public partial class MinhasOrdensViewModel : ObservableObject
                 }
             }
         }
-        catch (System.Exception)
+        catch (System.Exception ex)
         {
             await Application.Current.MainPage.DisplayAlert("Vixi", "Algo deu errado, tente novamente mais tarde", "Ok");
         }
@@ -81,16 +82,16 @@ public partial class MinhasOrdensViewModel : ObservableObject
     }
 
     [RelayCommand]
-    void Delete(string s)
+    void Delete(int s)
     {
-        if(MinhasOrdens.Contains(s))
-        {
-            MinhasOrdens.Remove(s);
-        }
+        //if(MinhasOrdens.Contains(s))
+        //{
+        //    MinhasOrdens.Remove(s);
+        //}
     }
 
     [RelayCommand]
-    async Task Tap(string s)
+    async Task Tap(int s)
     {
         await Shell.Current.GoToAsync($"{nameof(DetailPage)}?Text={s}");
     }

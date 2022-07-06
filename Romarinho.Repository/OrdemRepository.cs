@@ -28,7 +28,18 @@ public class OrdemRepository : IRepository<Ordem>
     {
         return new List<Ordem>
         {
-            new Ordem()
+            new Ordem
+            {
+                Assessor = "Assesor",
+                Ativo = "PETR4",
+                Id = 1
+            },
+            new Ordem
+            {
+                Assessor = "Assesor",
+                Ativo = "PETR4",
+                Id = 2
+            }
         };
     }
 }

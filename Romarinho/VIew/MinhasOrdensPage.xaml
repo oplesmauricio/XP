@@ -15,14 +15,14 @@
                         ItemsSource="{Binding MinhasOrdens}"
                         SelectionMode="None">
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="{x:Type x:String}">
+                <DataTemplate x:DataType="{x:Null}">
                     <SwipeView>
                         <SwipeView.RightItems>
                             <SwipeItems>
                                 <SwipeItem Text="Delete"
                                            BackgroundColor="Red"
                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MinhasOrdensViewModel}}, Path=DeleteCommand}"
-                                           CommandParameter="{Binding .}"/>
+                                           CommandParameter="{Binding Id}"/>
                             </SwipeItems>
                         </SwipeView.RightItems>
                         <Grid Padding="0,5">
@@ -30,9 +30,9 @@
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer 
                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MinhasOrdensViewModel}}, Path=TapCommand}"
-                                           CommandParameter="{Binding .}"/>
+                                           CommandParameter="{Binding Id}"/>
                                 </Frame.GestureRecognizers>
-                                <Label Text="{Binding .}"
+                                <Label Text="{Binding Assessor}"
                                        FontSize="24"/>
                             </Frame>
                         </Grid>
@@ -44,5 +44,5 @@
         </CollectionView>
 
     </Grid>
- 
+
 </ContentPage>

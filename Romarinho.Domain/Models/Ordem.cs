@@ -7,6 +7,7 @@ namespace Romarinho.Domain.Model
         {
         }
 
+        public int Id { get; set; }
         public DateTime Data { get; set; }
         public string Assessor { get; set; }
         public string Conta { get; set; }
