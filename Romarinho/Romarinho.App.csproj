@@ -51,6 +51,8 @@
 	  <None Remove="Websockets.Pcl" />
 	  <None Remove="Model\" />
 	  <None Remove="VIew\" />
+	  <None Remove="Model\Interfaces\" />
+	  <None Remove="Services\Interfaces\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -79,5 +81,10 @@
 	  <Folder Include="Services\" />
 	  <Folder Include="Model\" />
 	  <Folder Include="VIew\" />
+	  <Folder Include="Model\Interfaces\" />
+	  <Folder Include="Services\Interfaces\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\Romarinho.Domain\Romarinho.Domain.csproj" />
 	</ItemGroup>
 </Project>
