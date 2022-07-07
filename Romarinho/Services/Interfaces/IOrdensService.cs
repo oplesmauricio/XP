@@ -1,5 +1,6 @@
 ﻿using System;
 using Romarinho.App.Model;
+using Romarinho.Infra;
 
 namespace Romarinho.App.Services.Interfaces
 {

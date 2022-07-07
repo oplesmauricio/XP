@@ -1,7 +1,4 @@
-﻿using System;
-using Romarinho.Domain.Models;
-
-namespace Romarinho.App.Model.Interfaces
+﻿namespace Romarinho.App.Model.Interfaces
 {
     public interface IContexto
     {
@@ -9,4 +6,3 @@ namespace Romarinho.App.Model.Interfaces
         void SetarUsuarioContexto(Usuario usuario);
     }
 }
-
