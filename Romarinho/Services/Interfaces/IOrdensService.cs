@@ -9,7 +9,7 @@ namespace Romarinho.App.Services.Interfaces
 
         Task<RespostaServico<IEnumerable<Ordem>>> Cadastrar(Ordem ordem);
 
-        Task<RespostaServico<IEnumerable<Ordem>>> Editar(Ordem ordem);
+        Task<RespostaServico<string>> Editar(Ordem ordem);
 
         Task<RespostaServico<IEnumerable<Ordem>>> Deletar(string id);
 

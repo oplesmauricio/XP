@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Romarinho.App.DetailPage"
+             xmlns:viewmodel="clr-namespace:Romarinho.App.ViewModel"
+             x:DataType="viewmodel:DetailViewModel"
+             Title="DetailPage">
+    <ScrollView Padding="20" Margin="0,10">
+        <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*" />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition Height="100" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Text="Assessor"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                     Text="{Binding Ordem.Assessor}"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"  />
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="0"
+                   Text="Ativo"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+                <Label
+                    Grid.Row="1"
+                   Grid.Column="1"
+                   Text="{Binding Ordem.Ativo}" />
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Text="Data"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="1"
+                     Text="{Binding Ordem.Data}" />
+                <Label
+                    Grid.Row="3"
+                    Grid.Column="0"
+                   Text="Conta"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+                <Label
+                    Grid.Row="3"
+                   Grid.Column="1"
+                   Text="{Binding Ordem.Conta}"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"  />
+                
+                <Label
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Text="QtdAparente"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+                <Label
+                    Grid.Row="4"
+                    Grid.Column="1"
+                     Text="{Binding Ordem.QtdAparente}" 
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+                <Label
+                    Grid.Row="5"
+                    Grid.Column="0"
+                   Text="QtdDisponivel"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+                <Label
+                    Grid.Row="5"
+                   Grid.Column="1"
+                   Text="{Binding Ordem.QtdDisponivel}"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"  />
+                <Label
+                    Grid.Row="6"
+                    Grid.Column="0"
+                    Text="QtdCancelada"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+                <Label
+                    Grid.Row="6"
+                    Grid.Column="1"
+                     Text="{Binding Ordem.QtdCancelada}"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"  />
+                <Label
+                    Grid.Row="7"
+                    Grid.Column="0"
+                   Text="QtdExecutada"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+                <Label
+                    Grid.Row="7"
+                   Grid.Column="1"
+                   Text="{Binding Ordem.QtdExecutada}" 
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+                
+                <Label
+                    Grid.Row="8"
+                    Grid.Column="0"
+                   Text="ValorDisponivel"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+                <Label
+                    Grid.Row="8"
+                   Grid.Column="1"
+                   Text="{Binding Ordem.ValorDisponivel}"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"  />
+                <Label
+                    Grid.Row="9"
+                    Grid.Column="0"
+                    Text="Objetivo"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+                <Label
+                    Grid.Row="9"
+                    Grid.Column="1"
+                     Text="{Binding Ordem.Objetivo}"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"  />
+                <Label
+                    Grid.Row="10"
+                    Grid.Column="0"
+                   Text="ObjDispon"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+                <Label
+                    Grid.Row="10"
+                   Grid.Column="1"
+                   Text="{Binding Ordem.ObjDispon}" 
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+                <Label
+                    Grid.Row="11"
+                    Grid.Column="0"
+                    Text="Reducao"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+                <Label
+                    Grid.Row="11"
+                    Grid.Column="1"
+                     Text="{Binding Ordem.Reducao}"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"  />
+                <Label
+                    Grid.Row="12"
+                    Grid.Column="0"
+                   Text="Tipo"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+                <Label
+                    Grid.Row="12"
+                   Grid.Column="1"
+                   Text="{Binding Ordem.Tipo}"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"  />
+                <Label
+                    Grid.Row="13"
+                    Grid.Column="0"
+                    Text="Valor"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+                <Entry
+                    Grid.Row="13"
+                    Grid.Column="1"
+                     Text="{Binding Ordem.Valor}" />
+                <Label
+                    Grid.Row="14"
+                    Grid.Column="0"
+                   Text="Quantidade"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+                <Entry
+                    Grid.Row="14"
+                   Grid.Column="1"
+                   Text="{Binding Ordem.Quantidade}" />
+
+            </Grid>
+            
+            <Button Text="Editar"
+                Command="{Binding EditarCommand}" Margin="10"/>
+
+            <Button Text="Voltar"
+                Command="{Binding GoBackCommand}" Margin="10"/>
+        </StackLayout>
+
+
+    </ScrollView>
+</ContentPage>

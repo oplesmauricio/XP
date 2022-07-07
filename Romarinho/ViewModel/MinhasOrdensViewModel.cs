@@ -82,18 +82,46 @@ public partial class MinhasOrdensViewModel : ObservableObject
     }
 
     [RelayCommand]
-    void Delete(int s)
+    async Task DeleteAsync(Ordem ordem)
     {
-        //if(MinhasOrdens.Contains(s))
-        //{
-        //    MinhasOrdens.Remove(s);
-        //}
+        try
+        {
+            if (connectivity.NetworkAccess != NetworkAccess.Internet)
+            {
+                await Application.Current.MainPage.DisplayAlert("Atencao", "Parece que vc esta sem internet", "OK");
+            }
+            else
+            {
+                var requisicao = await _service.Deletar(ordem.Id.ToString());
+
+                if (requisicao.Sucesso)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Atencao", "Ordem excluida com sucesso!", "OK");
+                    if (MinhasOrdens.Contains(ordem))
+                    {
+                        MinhasOrdens.Remove(ordem);
+                    }
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Atencao", requisicao.Mensagem, "OK");
+                }
+            }
+        }
+        catch (System.Exception ex)
+        {
+            await Application.Current.MainPage.DisplayAlert("Vixi", "Algo deu errado, tente novamente mais tarde", "Ok");
+        }
     }
 
     [RelayCommand]
-    async Task Tap(int s)
+    async Task Tap(Ordem ordem)
     {
-        await Shell.Current.GoToAsync($"{nameof(DetailPage)}?Text={s}");
+        var navigationParameter = new Dictionary<string, object>
+        {
+            { "Ordem", ordem }
+        };
+        await Shell.Current.GoToAsync($"{nameof(DetailPage)}", navigationParameter);
     }
 
 }

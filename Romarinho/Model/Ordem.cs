@@ -31,10 +31,10 @@ namespace Romarinho.App.Model
         public int Quantidade { get; set; }
 
         [JsonPropertyName("qtdAparente")]
-        public string QtdAparente { get; set; }
+        public int QtdAparente { get; set; }
 
         [JsonPropertyName("qtdDisponivel")]
-        public string QtdDisponivel { get; set; }
+        public int QtdDisponivel { get; set; }
 
         [JsonPropertyName("qtdCancelada")]
         public int QtdCancelada { get; set; }

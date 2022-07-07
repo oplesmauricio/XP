@@ -14,8 +14,8 @@ namespace Romarinho.Domain.Model
         public string Ativo { get; set; }
         public string Tipo { get; set; }
         public int Quantidade { get; set; }
-        public string QtdAparente { get; set; }
-        public string QtdDisponivel { get; set; }
+        public int QtdAparente { get; set; }
+        public int QtdDisponivel { get; set; }
         public int QtdCancelada { get; set; }
         public int QtdExecutada { get; set; }
         public float Valor { get; set; }

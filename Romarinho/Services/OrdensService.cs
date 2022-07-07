@@ -22,9 +22,9 @@ namespace Romarinho.App.Services
             return _apiService.PostAsync<IEnumerable<Ordem>>(ordem, $"Ordem/");
         }
 
-        public Task<RespostaServico<IEnumerable<Ordem>>> Editar(Ordem ordem)
+        public Task<RespostaServico<string>> Editar(Ordem ordem)
         {
-            return _apiService.PutAsync<IEnumerable<Ordem>>(ordem, $"Ordem/");
+            return _apiService.PutAsync<string>(ordem, $"Ordem/");
         }
 
         public Task<RespostaServico<IEnumerable<Ordem>>> Deletar(string id)

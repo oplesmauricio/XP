@@ -43,27 +43,7 @@ namespace Romarinho.App.Services
 
                     using (var response = await client.PostAsync(_settings.UrlApi + url, conteudo))
                     {
-                        if (response.IsSuccessStatusCode)
-                        {
-                            var ProdutoJsonString = await response.Content.ReadAsStringAsync();
-                            var objeto = JsonSerializer.Deserialize<T>(ProdutoJsonString);
-                            return new RespostaServico<T>
-                            {
-                                Resposta = objeto,
-                                HttpStatus = response.StatusCode.ToString(),
-                                Sucesso = true,
-                                Mensagem = ""
-                            };
-                        }
-                        else
-                        {
-                            return new RespostaServico<T>
-                            {
-                                HttpStatus = response.StatusCode.ToString(),
-                                Sucesso = false,
-                                Mensagem = response.ReasonPhrase
-                            };
-                        }
+                        return await VerificarRetorno<T>(response);
                     }
                 }
             }
@@ -109,27 +89,7 @@ namespace Romarinho.App.Services
 
                     using (var response = await client.GetAsync(_settings.UrlApi + url))
                     {
-                        if (response.IsSuccessStatusCode)
-                        {
-                            var ProdutoJsonString = await response.Content.ReadAsStringAsync();
-                            var objeto = JsonSerializer.Deserialize<T>(ProdutoJsonString, new JsonSerializerOptions { Converters = { new JsonStringEnumConverter() } });
-                            return new RespostaServico<T>
-                            {
-                                Resposta = objeto,
-                                HttpStatus = response.StatusCode.ToString(),
-                                Sucesso = true,
-                                Mensagem = ""
-                            };
-                        }
-                        else
-                        {
-                            return new RespostaServico<T>
-                            {
-                                HttpStatus = response.StatusCode.ToString(),
-                                Sucesso = false,
-                                Mensagem = response.ReasonPhrase
-                            };
-                        }
+                        return await VerificarRetorno<T>(response);
                     }
                 }
             }
@@ -179,27 +139,7 @@ namespace Romarinho.App.Services
 
                     using (var response = await client.PutAsync(_settings.UrlApi + url, conteudo))
                     {
-                        if (response.IsSuccessStatusCode)
-                        {
-                            var ProdutoJsonString = await response.Content.ReadAsStringAsync();
-                            var objeto = JsonSerializer.Deserialize<T>(ProdutoJsonString);
-                            return new RespostaServico<T>
-                            {
-                                Resposta = objeto,
-                                HttpStatus = response.StatusCode.ToString(),
-                                Sucesso = true,
-                                Mensagem = ""
-                            };
-                        }
-                        else
-                        {
-                            return new RespostaServico<T>
-                            {
-                                HttpStatus = response.StatusCode.ToString(),
-                                Sucesso = false,
-                                Mensagem = response.ReasonPhrase
-                            };
-                        }
+                        return await VerificarRetorno<T>(response);
                     }
                 }
             }
@@ -219,6 +159,37 @@ namespace Romarinho.App.Services
                     HttpStatus = "400",
                     Sucesso = false,
                     Mensagem = ex.Message
+                };
+            }
+        }
+
+        private static async Task<RespostaServico<T>> VerificarRetorno<T>(HttpResponseMessage response)
+        {
+            if (response.IsSuccessStatusCode)
+            {
+                if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+                    return new RespostaServico<T>
+                    {
+                        Sucesso = true
+                    };
+
+                var ProdutoJsonString = await response.Content.ReadAsStringAsync();
+                var objeto = JsonSerializer.Deserialize<T>(ProdutoJsonString);
+                return new RespostaServico<T>
+                {
+                    Resposta = objeto,
+                    HttpStatus = response.StatusCode.ToString(),
+                    Sucesso = true,
+                    Mensagem = ""
+                };
+            }
+            else
+            {
+                return new RespostaServico<T>
+                {
+                    HttpStatus = response.StatusCode.ToString(),
+                    Sucesso = false,
+                    Mensagem = response.ReasonPhrase
                 };
             }
         }
@@ -246,27 +217,7 @@ namespace Romarinho.App.Services
 
                     using (var response = await client.DeleteAsync(_settings.UrlApi + url))
                     {
-                        if (response.IsSuccessStatusCode)
-                        {
-                            var ProdutoJsonString = await response.Content.ReadAsStringAsync();
-                            var objeto = JsonSerializer.Deserialize<T>(ProdutoJsonString, new JsonSerializerOptions { Converters = { new JsonStringEnumConverter() } });
-                            return new RespostaServico<T>
-                            {
-                                Resposta = objeto,
-                                HttpStatus = response.StatusCode.ToString(),
-                                Sucesso = true,
-                                Mensagem = ""
-                            };
-                        }
-                        else
-                        {
-                            return new RespostaServico<T>
-                            {
-                                HttpStatus = response.StatusCode.ToString(),
-                                Sucesso = false,
-                                Mensagem = response.ReasonPhrase
-                            };
-                        }
+                        return await VerificarRetorno<T>(response);
                     }
                 }
             }
@@ -371,27 +322,7 @@ namespace Romarinho.App.Services
             {
                 using (var response = await client.PostAsync(_settings.UrlApi + url, conteudo))
                 {
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var ProdutoJsonString = await response.Content.ReadAsStringAsync();
-                        var objeto = JsonSerializer.Deserialize<T>(ProdutoJsonString);
-                        return new RespostaServico<T>
-                        {
-                            Resposta = objeto,
-                            HttpStatus = response.StatusCode.ToString(),
-                            Sucesso = true,
-                            Mensagem = ""
-                        };
-                    }
-                    else
-                    {
-                        return new RespostaServico<T>
-                        {
-                            HttpStatus = response.StatusCode.ToString(),
-                            Sucesso = false,
-                            Mensagem = response.ReasonPhrase
-                        };
-                    }
+                    return await VerificarRetorno<T>(response);
                 }
             }
         }

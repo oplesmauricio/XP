@@ -22,7 +22,7 @@
                                 <SwipeItem Text="Delete"
                                            BackgroundColor="Red"
                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MinhasOrdensViewModel}}, Path=DeleteCommand}"
-                                           CommandParameter="{Binding Id}"/>
+                                           CommandParameter="{Binding .}"/>
                             </SwipeItems>
                         </SwipeView.RightItems>
                         <Grid Padding="0,5">
@@ -30,7 +30,7 @@
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer 
                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MinhasOrdensViewModel}}, Path=TapCommand}"
-                                           CommandParameter="{Binding Id}"/>
+                                           CommandParameter="{Binding .}"/>
                                 </Frame.GestureRecognizers>
                                 <Label Text="{Binding Assessor}"
                                        FontSize="24"/>
