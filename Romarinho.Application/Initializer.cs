@@ -14,5 +14,3 @@ public class Initializer
         services.AddScoped(typeof(IOrdemService), typeof(OrdemService));
     }
 }
-
-

@@ -75,6 +75,9 @@
 	  <MauiXaml Condition=" '$(EnableDefaultXamlItems)' == 'true' " Update="VIew\DetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="View\NovaOrdemPage.xaml">
+	    <SubType></SubType>
+	  </MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -86,5 +89,10 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\Romarinho.Domain\Romarinho.Domain.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="View\MinhasOrdensPage %28copiar%29.xaml.cs">
+	    <DependentUpon>DetailPage %28copiar%29.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 </Project>

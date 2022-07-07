@@ -1,5 +1,8 @@
 ﻿using System;
+using AutoMapper;
+using Romarinho.Api.DTOs;
 using Romarinho.Application;
+using Romarinho.Domain.Model;
 
 namespace Romarinho.Api
 {
@@ -16,6 +19,17 @@ namespace Romarinho.Api
         public void ConfigureServices(IServiceCollection services)
         {
             Initializer.Configure(services, Configuration.GetConnectionString("DefaultConnection"));
+
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<OrdemDTO, Ordem>();
+                cfg.CreateMap<IEnumerable<OrdemDTO>, IEnumerable<Ordem>>();
+                cfg.CreateMap<Ordem, OrdemDTO>();
+                cfg.CreateMap<IEnumerable<Ordem>, IEnumerable<OrdemDTO>>();
+            });
+            IMapper mapper = config.CreateMapper();
+            services.AddSingleton(mapper);
+
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();

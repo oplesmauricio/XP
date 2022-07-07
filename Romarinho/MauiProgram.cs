@@ -36,6 +36,9 @@ public static class MauiProgram
 		builder.Services.AddTransient<MinhasOrdensPage>();
 		builder.Services.AddTransient<MinhasOrdensViewModel>();
 
+		builder.Services.AddTransient<NovaOrdemPage>();
+		builder.Services.AddTransient<NovaOrdemViewModel>();
+
 		builder.Services.AddTransient<IApiService, ApiService>();
 		builder.Services.AddTransient<IOrdensService, OrdensService>();
 

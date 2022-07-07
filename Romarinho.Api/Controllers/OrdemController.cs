@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Romarinho.Api.DTOs;
 using Romarinho.Domain.Model;
 using Romarinho.Domain.Services;
 
@@ -10,19 +12,21 @@ public class OrdemController : ControllerBase
 {
     private readonly ILogger<OrdemController> _logger;
     private readonly IOrdemService _service;
+    private readonly IMapper _mapper;
 
-    public OrdemController(ILogger<OrdemController> logger, IOrdemService service)
+    public OrdemController(ILogger<OrdemController> logger, IOrdemService service, IMapper mapper)
     {
         _logger = logger;
         _service = service;
+        _mapper = mapper;
     }
 
     [HttpGet("{id}")]
-    public ActionResult<Ordem> Get(int id)
+    public ActionResult<OrdemDTO> Get(int id)
     {
         try
         {
-            return Ok(_service.PegarPorId(id));
+            return Ok(_mapper.Map<OrdemDTO>(_service.PegarPorId(id)));
         }
         catch (Exception ex)
         {
@@ -32,11 +36,11 @@ public class OrdemController : ControllerBase
     }
 
     [HttpPost]
-    public ActionResult Post([FromBody]Ordem ordem)
+    public ActionResult Post([FromBody]OrdemDTO ordem)
     {
         try
         {
-            _service.Cadastrar(ordem);
+            _service.Cadastrar(_mapper.Map<Ordem>(ordem));
             return NoContent();
         }
         catch (Exception ex)
@@ -47,11 +51,11 @@ public class OrdemController : ControllerBase
     }
 
     [HttpPut]
-    public ActionResult Put([FromBody] Ordem ordem)
+    public ActionResult Put([FromBody]OrdemDTO ordem)
     {
         try
         {
-            _service.Editar(ordem);
+            _service.Editar(_mapper.Map<Ordem>(ordem));
             return NoContent();
         }
         catch (Exception ex)
@@ -77,11 +81,12 @@ public class OrdemController : ControllerBase
     }
 
     [HttpGet("GetByUser/{idUsuario}")]
-    public ActionResult<IEnumerable<Ordem>> GetByUser(int idUsuario)
+    public ActionResult<IEnumerable<OrdemDTO>> GetByUser(int idUsuario)
     {
         try
         {
-            return Ok(_service.PegarPorIdUsuario(idUsuario));
+            var dtos = _service.PegarPorIdUsuario(idUsuario).ForEach(m => m.)
+            return Ok(_mapper.Map<IEnumerable<OrdemDTO>>(dtos));
         }
         catch (Exception ex)
         {

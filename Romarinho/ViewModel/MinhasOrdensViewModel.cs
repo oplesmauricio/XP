@@ -65,20 +65,9 @@ public partial class MinhasOrdensViewModel : ObservableObject
     string text;
 
     [RelayCommand]
-    async Task Add()
+    async Task Cadastrar()
     {
-        if (string.IsNullOrWhiteSpace(Text))
-            return;
-
-        if(connectivity.NetworkAccess != NetworkAccess.Internet)
-        {
-            await Shell.Current.DisplayAlert("Uh Oh!", "No Internet", "OK");
-            return;
-        }
-
-        //MinhasOrdens.Add(Text);
-        // add our item
-        Text = string.Empty;
+        await Shell.Current.GoToAsync($"{nameof(NovaOrdemPage)}");
     }
 
     [RelayCommand]
