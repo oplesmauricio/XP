@@ -85,8 +85,15 @@ public class OrdemController : ControllerBase
     {
         try
         {
-            var dtos = _service.PegarPorIdUsuario(idUsuario).ForEach(m => m.)
-            return Ok(_mapper.Map<IEnumerable<OrdemDTO>>(dtos));
+            var ordens = _service.PegarPorIdUsuario(idUsuario).ToList();
+
+            var dtos = new List<OrdemDTO>();
+            foreach (var ordem in ordens)
+            {
+                dtos.Add(_mapper.Map<OrdemDTO>(ordem));
+            }
+            
+            return Ok(dtos);
         }
         catch (Exception ex)
         {

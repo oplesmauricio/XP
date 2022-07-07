@@ -6,7 +6,6 @@ using Romarinho.App.Services.Interfaces;
 
 namespace Romarinho.App.ViewModel;
 
-[QueryProperty("Ordem", "Ordem")]
 public partial class NovaOrdemViewModel : ObservableObject
 {
     private IConnectivity connectivity;
@@ -17,6 +16,7 @@ public partial class NovaOrdemViewModel : ObservableObject
         this.connectivity = connectivity;
         this._service = service;
         this._contexto = contexto;
+        this.Ordem = new Ordem();
     }
 
     [ObservableProperty]

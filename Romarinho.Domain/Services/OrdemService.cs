@@ -15,11 +15,32 @@ namespace Romarinho.Domain.Services
 
         public void Cadastrar(Ordem ordem)
         {
+            Mock(ordem);
+
             _repository.Cadastrar(ordem);
+        }
+
+        private static void Mock(Ordem ordem)
+        {
+            ordem.Assessor = "Romarinho";
+            ordem.Ativo = "PETR4";
+            ordem.Conta = "Conta";
+            ordem.Data = DateTime.Now;
+            ordem.ObjDispon = 0;
+            ordem.Objetivo = 0;
+            ordem.QtdAparente = ordem.Quantidade;
+            ordem.QtdCancelada = ordem.Quantidade;
+            ordem.QtdDisponivel = ordem.Quantidade;
+            ordem.QtdExecutada = 0;
+            ordem.Reducao = "";
+            ordem.ValorDisponivel = ordem.Valor;
+            ordem.Tipo = "COMPRA";
+            ordem.IdUsuario = 1;
         }
 
         public void Editar(Ordem ordem)
         {
+            Mock(ordem);
             _repository.Editar(ordem);
         }
 
