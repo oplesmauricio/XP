@@ -17,7 +17,7 @@ public partial class WSViewModel : ObservableObject
     IConnectivity connectivity;
     public WSViewModel(IConnectivity connectivity)
     {
-        Items = new ObservableCollection<string>();
+        Items = new ObservableCollection<Ordem>();
         this.connectivity = connectivity;
 
         client = new ClientWebSocket();
@@ -26,7 +26,7 @@ public partial class WSViewModel : ObservableObject
     }
 
     [ObservableProperty]
-    ObservableCollection<string> items;
+    ObservableCollection<Ordem> items;
 
     [RelayCommand]
     async Task MinhasOrdens()
@@ -35,18 +35,18 @@ public partial class WSViewModel : ObservableObject
     }
 
     [RelayCommand]
-    void Delete(string s)
+    void Delete(Ordem ordem)
     {
-        if(Items.Contains(s))
+        if(Items.Contains(ordem))
         {
-            Items.Remove(s);
+            Items.Remove(ordem);
         }
     }
 
     [RelayCommand]
-    async Task Tap(string s)
+    async Task Tap(Ordem ordem)
     {
-        await Shell.Current.GoToAsync($"{nameof(DetailPage)}?Text={s}");
+        await Shell.Current.GoToAsync($"{nameof(DetailPage)}");
     }
 
     async void ConnectToServerAsync()
@@ -74,8 +74,17 @@ public partial class WSViewModel : ObservableObject
 
                     try
                     {
-                        var ordem = ByteArrayToObject(messageBytes);
-                        Items.Add(ordem.Ativo);
+                        var ordens = await ByteArrayToObjectAsync(messageBytes);
+                        foreach (var ordem in ordens)
+                        {
+                            if (!Items.Contains(ordem))
+                                Items.Add(ordem);
+                            else
+                            {
+                                Items.Remove(ordem);
+                                Items.Add(ordem);
+                            }
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -91,13 +100,16 @@ public partial class WSViewModel : ObservableObject
     readonly CancellationTokenSource cts;
     readonly string username;
 
-    private Ordem ByteArrayToObject(byte[] arrBytes)
+    private async Task<List<Ordem>> ByteArrayToObjectAsync(byte[] arrBytes)
     {
         MemoryStream memStream = new MemoryStream();
         //BinaryFormatter binForm = new BinaryFormatter();
         memStream.Write(arrBytes, 0, arrBytes.Length);
         memStream.Seek(0, SeekOrigin.Begin);
-        return JsonSerializer.Deserialize<Ordem>(memStream);
+        return await JsonSerializer.DeserializeAsync<List<Ordem>>(memStream, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true,
+        });
 
         //return obj;
     }

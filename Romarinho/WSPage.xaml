@@ -6,7 +6,7 @@
              x:DataType="viewmodel:WSViewModel"
              Title="Book">
 
-    <Grid RowDefinitions="1, *, Auto"
+    <Grid RowDefinitions="50, *, Auto"
           ColumnDefinitions=".75*, .25*"
           Padding="10"
           RowSpacing="10"
@@ -19,13 +19,51 @@
         <!--<Entry Placeholder="Enter task"
                Text="{Binding Text}"
                Grid.Row="1"/>-->
-
+        <Grid
+            Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="40"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Text="Ativo"/>
+            <Label Grid.Column="1" Text="Qtde"/>
+            <Label Grid.Column="2" Text="Valor"/>
+            <Label Grid.Column="3" Text="Assessor"/>
+            <Label Grid.Column="4" Text="Tipo"/>
+            <Label Grid.Column="5" Text="Data"/>
+        </Grid>
         <CollectionView Grid.Row="1" Grid.ColumnSpan="2"
                         ItemsSource="{Binding Items}"
                         SelectionMode="None">
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="{x:Type x:String}">
-                    <SwipeView>
+                <DataTemplate x:DataType="{x:Null}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Text="{Binding Ativo}"/>
+                        <Label Grid.Column="1" Text="{Binding Quantidade}"/>
+                        <Label Grid.Column="2" Text="{Binding Valor}"/>
+                        <Label Grid.Column="3" Text="{Binding Assessor}"/>
+                        <Label Grid.Column="4" Text="{Binding Tipo}"/>
+                        <Label Grid.Column="5" Text="{Binding Data}"/>
+                    </Grid>
+                    <!--<SwipeView>
                         <SwipeView.RightItems>
                             <SwipeItems>
                                 <SwipeItem Text="Delete"
@@ -45,11 +83,11 @@
                                        FontSize="24"/>
                             </Frame>
                         </Grid>
-                    </SwipeView>
+                    </SwipeView>-->
                 </DataTemplate>
-                
+
             </CollectionView.ItemTemplate>
-            
+
         </CollectionView>
 
         <Button Text="Minhas Ordens"
@@ -59,5 +97,5 @@
 
 
     </Grid>
- 
+
 </ContentPage>

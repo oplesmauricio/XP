@@ -56,6 +56,20 @@ namespace Romarinho.App.Model
 
         [JsonPropertyName("reducao")]
         public string Reducao { get; set; }
+
+        public override bool Equals(object comparavel)
+        {
+            if (comparavel is Ordem)
+            {
+                var ordem = (Ordem)comparavel;
+                if (this.Id == ordem.Id)
+                {
+                    return true;
+                }
+                return false;
+            }
+            return false;
+        }
     }
 }
 
