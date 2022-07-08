@@ -58,6 +58,11 @@ namespace Romarinho.Domain.Services
         {
             return _repository.PegarPorIdUsuario(idUsuario);
         }
+
+        public IEnumerable<Ordem> PegarTodas()
+        {
+            return _repository.PegarTodas();
+        }
     }
 }
 

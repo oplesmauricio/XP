@@ -10,6 +10,7 @@ namespace Romarinho.Domain.Services
         void Editar(Ordem ordem);
         void Excluir(int id);
         IEnumerable<Ordem> PegarPorIdUsuario(int idUsuario);
+        IEnumerable<Ordem> PegarTodas();
     }
 }
 

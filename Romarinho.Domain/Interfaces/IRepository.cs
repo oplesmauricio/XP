@@ -1,4 +1,6 @@
 ﻿using System;
+using Romarinho.Domain.Model;
+
 namespace Romarinho.Domain.Interfaces
 {
     public interface IRepository<TEntity> where TEntity : class
@@ -8,6 +10,7 @@ namespace Romarinho.Domain.Interfaces
         void Cadastrar(TEntity entity);
         void Editar(TEntity entity);
         void Excluir(int id);
+        IEnumerable<Ordem> PegarTodas();
     }
 }
 

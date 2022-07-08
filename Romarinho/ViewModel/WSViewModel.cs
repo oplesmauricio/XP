@@ -1,11 +1,14 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Romarinho.App.Model;
 using Romarinho.App.Services;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Net.WebSockets;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Text.Json;
 
 namespace Romarinho.App.ViewModel;
 
@@ -19,34 +22,16 @@ public partial class WSViewModel : ObservableObject
 
         client = new ClientWebSocket();
         cts = new CancellationTokenSource();
-        //messages = new ObservableCollection<Message>();
-
-        //this.username = username;
-
         ConnectToServerAsync();
     }
 
     [ObservableProperty]
     ObservableCollection<string> items;
 
-    [ObservableProperty]
-    string text;
-
     [RelayCommand]
-    async Task Add()
+    async Task MinhasOrdens()
     {
-        //using var ws = new ClientWebSocket();
-        //await ws.ConnectAsync(new Uri("wss://demo.piesocket.com/v3/channel_1?api_key=VCXCEuvhGcBDP7XhiJJUDvR1e1D3eiVjgZ9VRiaV&notify_self"), CancellationToken.None);
-
-        //var buffer = new byte[256];
-        //while (ws.State == WebSocketState.Open)
-        //{
-        //    var result = await ws.ReceiveAsync(buffer, CancellationToken.None);
-        //    if (result.MessageType == WebSocketMessageType.Close)
-        //        await ws.CloseAsync(WebSocketCloseStatus.NormalClosure, null, CancellationToken.None);
-        //    else
-        //        Console.WriteLine(Encoding.ASCII.GetString(buffer, 0, result.Count));
-        //}
+        await Shell.Current.GoToAsync($"{nameof(MinhasOrdensPage)}");
     }
 
     [RelayCommand]
@@ -64,30 +49,6 @@ public partial class WSViewModel : ObservableObject
         await Shell.Current.GoToAsync($"{nameof(DetailPage)}?Text={s}");
     }
 
-
-
-    public bool IsConnected => client.State == WebSocketState.Open;
-
-    public Command SendMessage => sendMessageCommand ??
-        (sendMessageCommand = new Command<string>(SendMessageAsync, CanSendMessage));
-
-    //public ObservableCollection<Message> Messages => messages;
-
-    public string MessageText
-    {
-        get
-        {
-            return messageText;
-        }
-        set
-        {
-            messageText = value;
-            OnPropertyChanged();
-
-            sendMessageCommand.ChangeCanExecute();
-        }
-    }
-
     async void ConnectToServerAsync()
     {
 
@@ -98,7 +59,6 @@ public partial class WSViewModel : ObservableObject
 //      await client.ConnectAsync(new Uri("ws://10.0.2.2:5000"), cts.Token);
 //#endif
 
-        //UpdateClientState();
 
         await Task.Factory.StartNew(async () =>
         {
@@ -110,13 +70,12 @@ public partial class WSViewModel : ObservableObject
                 {
                     result = await client.ReceiveAsync(message, cts.Token);
                     var messageBytes = message.Skip(message.Offset).Take(result.Count).ToArray();
-                    string serialisedMessae = Encoding.UTF8.GetString(messageBytes);
+                    //string serialisedMessae = Encoding.UTF8.GetString(messageBytes);
 
                     try
                     {
-                        //var msg = JsonConvert.DeserializeObject<Message>(serialisedMessae);
-                        //Messages.Add(msg);
-                        Items.Add(serialisedMessae);
+                        var ordem = ByteArrayToObject(messageBytes);
+                        Items.Add(ordem.Ativo);
                     }
                     catch (Exception ex)
                     {
@@ -126,53 +85,20 @@ public partial class WSViewModel : ObservableObject
                 } while (!result.EndOfMessage);
             }
         }, cts.Token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
-
-        //void UpdateClientState()
-        //{
-        //    OnPropertyChanged(nameof(IsConnected));
-        //    sendMessageCommand.ChangeCanExecute();
-        //    Console.WriteLine($"Websocket state {client.State}");
-        //}
-    }
-
-    async void SendMessageAsync(string message)
-    {
-        //var msg = new Message
-        //{
-        //    Name = username,
-        //    MessagDateTime = DateTime.Now,
-        //    Text = message,
-        //    UserId = CrossDeviceInfo.Current.Id
-        //};
-
-        //string serialisedMessage = JsonConvert.SerializeObject(msg);
-
-        //var byteMessage = Encoding.UTF8.GetBytes(serialisedMessage);
-        //var segmnet = new ArraySegment<byte>(byteMessage);
-
-        //await client.SendAsync(segmnet, WebSocketMessageType.Text, true, cts.Token);
-        //MessageText = string.Empty;
-    }
-
-    bool CanSendMessage(string message)
-    {
-        return IsConnected && !string.IsNullOrEmpty(message);
-    }
-
-    public event PropertyChangedEventHandler PropertyChanged;
-
-    void OnPropertyChanged([CallerMemberName] string propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
     readonly ClientWebSocket client;
     readonly CancellationTokenSource cts;
     readonly string username;
 
+    private Ordem ByteArrayToObject(byte[] arrBytes)
+    {
+        MemoryStream memStream = new MemoryStream();
+        //BinaryFormatter binForm = new BinaryFormatter();
+        memStream.Write(arrBytes, 0, arrBytes.Length);
+        memStream.Seek(0, SeekOrigin.Begin);
+        return JsonSerializer.Deserialize<Ordem>(memStream);
 
-    Command<string> sendMessageCommand;
-    //ObservableCollection<Message> messages;
-    string messageText;
-
+        //return obj;
+    }
 }
