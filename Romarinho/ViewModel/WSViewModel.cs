@@ -18,6 +18,8 @@ public partial class WSViewModel : ObservableObject
     public WSViewModel(IConnectivity connectivity)
     {
         Items = new ObservableCollection<Ordem>();
+        //BorderColor = Microsoft.Maui.Graphics.Color.FromRgb(100, 0, 0);
+        BorderColor = "Red";
         this.connectivity = connectivity;
 
         client = new ClientWebSocket();
@@ -27,6 +29,15 @@ public partial class WSViewModel : ObservableObject
 
     [ObservableProperty]
     ObservableCollection<Ordem> items;
+
+    [ObservableProperty]
+    //Color borderColor;
+    string borderColor;
+
+    public Microsoft.Maui.Graphics.Color ShapeColorForMAUI
+    {
+        get => Microsoft.Maui.Graphics.Color.FromRgb(100, 0, 0);
+    }
 
     [RelayCommand]
     async Task MinhasOrdens()
@@ -78,9 +89,13 @@ public partial class WSViewModel : ObservableObject
                         foreach (var ordem in ordens)
                         {
                             if (!Items.Contains(ordem))
+                            {
+                                BorderColor = "Green";
                                 Items.Add(ordem);
+                            }
                             else
                             {
+                                BorderColor = "Red";
                                 Items.Remove(ordem);
                                 Items.Add(ordem);
                             }

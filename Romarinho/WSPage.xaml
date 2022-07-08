@@ -5,7 +5,11 @@
              xmlns:viewmodel="clr-namespace:Romarinho.App.ViewModel"
              x:DataType="viewmodel:WSViewModel"
              Title="Book">
-
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="BorderColor" Value="{Binding BorderColor}" />
+        </Style>
+    </ContentPage.Resources>
     <Grid RowDefinitions="50, *, Auto"
           ColumnDefinitions=".75*, .25*"
           Padding="10"
@@ -19,50 +23,58 @@
         <!--<Entry Placeholder="Enter task"
                Text="{Binding Text}"
                Grid.Row="1"/>-->
+
         <Grid
+            x:Name="grid1"
             Grid.Row="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="20" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="40"/>
                 <ColumnDefinition Width="50"/>
                 <ColumnDefinition Width="50"/>
-                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Text="Ativo"/>
-            <Label Grid.Column="1" Text="Qtde"/>
-            <Label Grid.Column="2" Text="Valor"/>
-            <Label Grid.Column="3" Text="Assessor"/>
-            <Label Grid.Column="4" Text="Tipo"/>
-            <Label Grid.Column="5" Text="Data"/>
+            <Label Grid.Column="0" Text="Ativo" />
+            <Label Grid.Column="1" Text="Qtde" />
+            <Label Grid.Column="2" Text="Valor" />
+            <Label Grid.Column="3" Text="Assessor" />
+            <Label Grid.Column="4" Text="Tipo" />
+            <Label Grid.Column="5" Text="Data" />
+            <Label Grid.Column="6" x:Name="lblColor" Text="{Binding BorderColor}" IsVisible="False"/>
         </Grid>
         <CollectionView Grid.Row="1" Grid.ColumnSpan="2"
                         ItemsSource="{Binding Items}"
                         SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="{x:Null}">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="20" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="40"/>
-                            <ColumnDefinition Width="40"/>
-                            <ColumnDefinition Width="40"/>
-                            <ColumnDefinition Width="50"/>
-                            <ColumnDefinition Width="50"/>
-                            <ColumnDefinition Width="40"/>
-                        </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Text="{Binding Ativo}"/>
-                        <Label Grid.Column="1" Text="{Binding Quantidade}"/>
-                        <Label Grid.Column="2" Text="{Binding Valor}"/>
-                        <Label Grid.Column="3" Text="{Binding Assessor}"/>
-                        <Label Grid.Column="4" Text="{Binding Tipo}"/>
-                        <Label Grid.Column="5" Text="{Binding Data}"/>
-                    </Grid>
+                    <Frame
+                        Padding="5"
+                        PropertyChanging="Frame_PropertyChanging">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="{Binding Ativo}"/>
+                            <Label Grid.Column="1" Text="{Binding Quantidade}"/>
+                            <Label Grid.Column="2" Text="{Binding Valor}"/>
+                            <Label Grid.Column="3" Text="{Binding Assessor}"/>
+                            <Label Grid.Column="4" Text="{Binding Tipo}"/>
+                            <Label Grid.Column="5" Text="{Binding Data}"/>
+                        </Grid>
+                    </Frame>
                     <!--<SwipeView>
                         <SwipeView.RightItems>
                             <SwipeItems>
