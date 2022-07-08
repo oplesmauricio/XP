@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Romarinho.App.Models
+namespace Romarinho.App.Model
 {
     public class Usuario : Pessoa
     {

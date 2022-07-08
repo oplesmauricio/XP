@@ -3,6 +3,7 @@ using Romarinho.App.Model.Interfaces;
 using Romarinho.App.Services;
 using Romarinho.App.Services.Interfaces;
 using Romarinho.App.ViewModel;
+using Romarinho.Infra;
 
 namespace Romarinho.App;
 
@@ -20,7 +21,7 @@ public static class MauiProgram
 			});
 
 		builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
-		builder.Services.AddSingleton<IContexto>(new Contexto { UsuarioLogado = new Domain.Models.Usuario { Id = "1" } });
+		builder.Services.AddSingleton<IContexto>(new Contexto { UsuarioLogado = new Model.Usuario { Id = "1" } });
 		builder.Services.AddSingleton<ISettings>(new Settings { Token = "token"});
 
 		builder.Services.AddSingleton<MainPage>();

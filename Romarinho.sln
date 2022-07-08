@@ -24,6 +24,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Romarinho.Repository", "Rom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Romarinho.Application", "Romarinho.Application\Romarinho.Application.csproj", "{9188C35B-8452-4FF0-8F35-E227636E7A30}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Romarinho.Testes", "Romarinho.Testes\Romarinho.Testes.csproj", "{9A937B7F-C62D-4398-B0F1-DAE68885AA70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Romarinho.Infra", "Romarinho.Infra\Romarinho.Infra.csproj", "{E45F3335-39CF-4F9E-BCBB-445AA28651FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +60,14 @@ Global
 		{9188C35B-8452-4FF0-8F35-E227636E7A30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9188C35B-8452-4FF0-8F35-E227636E7A30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9188C35B-8452-4FF0-8F35-E227636E7A30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A937B7F-C62D-4398-B0F1-DAE68885AA70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A937B7F-C62D-4398-B0F1-DAE68885AA70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A937B7F-C62D-4398-B0F1-DAE68885AA70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A937B7F-C62D-4398-B0F1-DAE68885AA70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E45F3335-39CF-4F9E-BCBB-445AA28651FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E45F3335-39CF-4F9E-BCBB-445AA28651FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E45F3335-39CF-4F9E-BCBB-445AA28651FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E45F3335-39CF-4F9E-BCBB-445AA28651FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

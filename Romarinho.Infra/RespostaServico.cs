@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Romarinho.App.Model
+namespace Romarinho.Infra
 {
     public class RespostaServico<T>
     {

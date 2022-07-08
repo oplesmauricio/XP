@@ -3,27 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Romarinho.App.WSPage"
              xmlns:viewmodel="clr-namespace:Romarinho.App.ViewModel"
-             x:DataType="viewmodel:WSViewModel">
+             x:DataType="viewmodel:WSViewModel"
+             Title="Book">
 
-    <Grid RowDefinitions="100, Auto, *"
+    <Grid RowDefinitions="1, *, Auto"
           ColumnDefinitions=".75*, .25*"
           Padding="10"
           RowSpacing="10"
           ColumnSpacing="10">
 
-        <Image Grid.ColumnSpan="2"
+        <!--<Image Grid.ColumnSpan="2"
                 Source="logo.png"
-               BackgroundColor="Transparent"/>
+               BackgroundColor="Transparent"/>-->
 
         <!--<Entry Placeholder="Enter task"
                Text="{Binding Text}"
                Grid.Row="1"/>-->
 
-        <Button Text="Iniciar Leitura"
-                Command="{Binding AddCommand}"
-                Grid.Row="1"/>
-
-        <CollectionView Grid.Row="2" Grid.ColumnSpan="2"
+        <CollectionView Grid.Row="1" Grid.ColumnSpan="2"
                         ItemsSource="{Binding Items}"
                         SelectionMode="None">
             <CollectionView.ItemTemplate>
@@ -54,6 +51,12 @@
             </CollectionView.ItemTemplate>
             
         </CollectionView>
+
+        <Button Text="Minhas Ordens"
+                Command="{Binding MinhasOrdensCommand}"
+                Grid.Row="2"
+                Grid.ColumnSpan="2"/>
+
 
     </Grid>
  

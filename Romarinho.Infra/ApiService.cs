@@ -1,22 +1,11 @@
-﻿using System;
-using System.Net.Http.Headers;
-using System.Text;
+﻿using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Romarinho.App.Model;
-using Romarinho.App.Services.Interfaces;
 
-namespace Romarinho.App.Services
+namespace Romarinho.Infra
 {
-    
+
     public class ApiService : IApiService
     {
-        public ISettings _settings { get; set; }
-        public ApiService(ISettings settings)
-        {
-            _settings = settings;
-        }
-
         /// <summary>
         /// Metodo para requisicoes via Post
         /// </summary>
@@ -25,7 +14,7 @@ namespace Romarinho.App.Services
         /// <param name="url">Endereco completo da API</param>
         /// <param name="headers">Cabeçalhos a serem utilizados no formato "string" "string"</param>
         /// <returns>Objeto do tipo RespostaServico contendo uma propriedade chamada "resposta" do tipo T passado na chamada do metodo</returns>
-        public async Task<RespostaServico<T>> PostAsync<T>(object item, string url)
+        public async Task<RespostaServico<T>> PostAsync<T>(object item, string url, List<KeyValuePair<string, string>> headers)
         {
             try
             {
@@ -38,10 +27,12 @@ namespace Romarinho.App.Services
 
                 using (var client = new HttpClient(_handler))
                 {
-                    client.DefaultRequestHeaders.Authorization
-                         = new AuthenticationHeaderValue(_settings.Token);
+                    foreach (var header in headers)
+                    {
+                        client.DefaultRequestHeaders.Add(header.Key, header.Value);
+                    }
 
-                    using (var response = await client.PostAsync(_settings.UrlApi + url, conteudo))
+                    using (var response = await client.PostAsync(url, conteudo))
                     {
                         return await VerificarRetorno<T>(response);
                     }
@@ -74,7 +65,7 @@ namespace Romarinho.App.Services
         /// <param name="url">Endereco completo da API</param>
         /// <param name="headers">Cabeçalhos a serem utilizados no formato "string" "string"</param>
         /// <returns>Objeto do tipo RespostaServico contendo uma propriedade chamada "resposta" do tipo T passado na chamada do metodo</returns>
-        public async Task<RespostaServico<T>> GetAsync<T>(string url)
+        public async Task<RespostaServico<T>> GetAsync<T>(string url, List<KeyValuePair<string, string>> headers)
         {
             try
             {
@@ -84,10 +75,12 @@ namespace Romarinho.App.Services
 
                 using (var client = new HttpClient(_handler))
                 {
-                    client.DefaultRequestHeaders.Authorization
-                         = new AuthenticationHeaderValue(_settings.Token);
+                    foreach (var header in headers)
+                    {
+                        client.DefaultRequestHeaders.Add(header.Key, header.Value);
+                    }
 
-                    using (var response = await client.GetAsync(_settings.UrlApi + url))
+                    using (var response = await client.GetAsync(url))
                     {
                         return await VerificarRetorno<T>(response);
                     }
@@ -121,7 +114,7 @@ namespace Romarinho.App.Services
         /// <param name="url">Endereco completo da API</param>
         /// <param name="headers">Cabeçalhos a serem utilizados no formato "string" "string"</param>
         /// <returns>Objeto do tipo RespostaServico contendo uma propriedade chamada "resposta" do tipo T passado na chamada do metodo</returns>
-        public async Task<RespostaServico<T>> PutAsync<T>(object item, string url)
+        public async Task<RespostaServico<T>> PutAsync<T>(object item, string url, List<KeyValuePair<string, string>> headers)
         {
             try
             {
@@ -134,10 +127,12 @@ namespace Romarinho.App.Services
 
                 using (var client = new HttpClient(_handler))
                 {
-                    client.DefaultRequestHeaders.Authorization
-                         = new AuthenticationHeaderValue(_settings.Token);
+                    foreach (var header in headers)
+                    {
+                        client.DefaultRequestHeaders.Add(header.Key, header.Value);
+                    }
 
-                    using (var response = await client.PutAsync(_settings.UrlApi + url, conteudo))
+                    using (var response = await client.PutAsync(url, conteudo))
                     {
                         return await VerificarRetorno<T>(response);
                     }
@@ -202,7 +197,7 @@ namespace Romarinho.App.Services
         /// <param name="url">Endereco completo da API</param>
         /// <param name="headers">Cabeçalhos a serem utilizados no formato "string" "string"</param>
         /// <returns>Objeto do tipo RespostaServico contendo uma propriedade chamada "resposta" do tipo T passado na chamada do metodo</returns>
-        public async Task<RespostaServico<T>> DeleteAsync<T>(string url)
+        public async Task<RespostaServico<T>> DeleteAsync<T>(string url, List<KeyValuePair<string, string>> headers)
         {
             try
             {
@@ -212,10 +207,12 @@ namespace Romarinho.App.Services
 
                 using (var client = new HttpClient(_handler))
                 {
-                    client.DefaultRequestHeaders.Authorization
-                         = new AuthenticationHeaderValue(_settings.Token);
+                    foreach (var header in headers)
+                    {
+                        client.DefaultRequestHeaders.Add(header.Key, header.Value);
+                    }
 
-                    using (var response = await client.DeleteAsync(_settings.UrlApi + url))
+                    using (var response = await client.DeleteAsync(url))
                     {
                         return await VerificarRetorno<T>(response);
                     }
@@ -320,7 +317,7 @@ namespace Romarinho.App.Services
 
             using (var client = new HttpClient(_handler))
             {
-                using (var response = await client.PostAsync(_settings.UrlApi + url, conteudo))
+                using (var response = await client.PostAsync(url, conteudo))
                 {
                     return await VerificarRetorno<T>(response);
                 }

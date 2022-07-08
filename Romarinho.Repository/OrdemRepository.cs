@@ -178,5 +178,28 @@ public class OrdemRepository : IRepository<Ordem>
             }
         }
     }
+
+    public IEnumerable<Ordem> PegarTodas()
+    {
+        var connectionString = _configuration.GetConnectionString("RomarinhoConnection");
+
+        using (var con = new MySqlConnection(connectionString))
+        {
+            try
+            {
+                con.Open();
+
+                return con.Query<Ordem>($"SELECT * FROM Ordem", commandType: System.Data.CommandType.Text).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+    }
 }
 
