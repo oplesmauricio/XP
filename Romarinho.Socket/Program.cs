@@ -29,40 +29,19 @@ app.Map("/", async context =>
         while (true)
         {
             var ordens = ordemService.PegarTodas();
+
             byte[] array;
-            //BinaryFormatter bf = new BinaryFormatter();
             using (MemoryStream ms = new MemoryStream())
             {
                 JsonSerializer.Serialize(ms, ordens);
-                //bf.Serialize(ms, ordem);
                 array = ms.ToArray();
             }
 
             await webSocket.SendAsync(
                 array,
-                //JsonSerializer.Serialize(ordem).ToArray(),
-                //Encoding.ASCII.GetBytes(array),
                 WebSocketMessageType.Text,
                 true, CancellationToken.None);
-            //foreach (var ordem in ordens)
-            //{
-            //    byte[] array;
-            //    //BinaryFormatter bf = new BinaryFormatter();
-            //    using (MemoryStream ms = new MemoryStream())
-            //    {
-            //        JsonSerializer.Serialize(ms, ordem);
-            //        //bf.Serialize(ms, ordem);
-            //        array = ms.ToArray();
-            //    }
-
-            //    await webSocket.SendAsync(
-            //        array,
-            //        //JsonSerializer.Serialize(ordem).ToArray(),
-            //        //Encoding.ASCII.GetBytes(array),
-            //        WebSocketMessageType.Text,
-            //        true, CancellationToken.None);
-            //}
-            await Task.Delay(10000);
+            await Task.Delay(1000);
         }
     }
 });

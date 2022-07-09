@@ -33,8 +33,30 @@
                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MinhasOrdensViewModel}}, Path=TapCommand}"
                                            CommandParameter="{Binding .}"/>
                                 </Frame.GestureRecognizers>
-                                <Label Text="{Binding Assessor}"
-                                       FontSize="24"/>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width=".25*"/>
+                                        <ColumnDefinition Width=".25*"/>
+                                        <ColumnDefinition Width=".25*"/>
+                                        <ColumnDefinition Width=".25*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Row="0" Grid.Column="0" Text="Ativo:"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding Ativo}"/>
+
+                                    <Label Grid.Row="1" Grid.Column="0" Text="Quantidade:"/>
+                                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding Quantidade}"/>
+
+                                    <Label Grid.Row="0" Grid.Column="2" Text="Valor:"/>
+                                    <Label Grid.Row="0" Grid.Column="3" Text="{Binding Valor}"/>
+
+                                    <Label Grid.Row="1" Grid.Column="2" Text="Assessor:"/>
+                                    <Label Grid.Row="1" Grid.Column="3" Text="{Binding Assessor}"/>
+
+                                </Grid>
                             </Frame>
                         </Grid>
                     </SwipeView>

@@ -31,6 +31,7 @@ public class OrdemController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError(ex.Message);
+            Log(ex);
             return StatusCode(500);
         }
     }
@@ -46,6 +47,7 @@ public class OrdemController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError(ex.Message);
+            Log(ex);
             return StatusCode(500);
         }
     }
@@ -61,6 +63,7 @@ public class OrdemController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError(ex.Message);
+            Log(ex);
             return StatusCode(500);
         }
     }
@@ -76,6 +79,7 @@ public class OrdemController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError(ex.Message);
+            Log(ex);
             return StatusCode(500);
         }
     }
@@ -98,7 +102,24 @@ public class OrdemController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError(ex.Message);
+            Log(ex);
             return StatusCode(500);
+        }
+    }
+
+    private void Log(Exception ex)
+    {
+        using (System.IO.StreamWriter oWr = new System.IO.StreamWriter(@"h:\root\home\mauriciocph-001\www\romarinhoapi\superNintendo.txt", true))
+        {
+            oWr.WriteLine(this.GetType());
+            oWr.WriteLine(DateTime.Now.ToString());
+            oWr.WriteLine("StackTrace: " + ex.StackTrace);
+            oWr.WriteLine("Message: " + ex.Message);
+            oWr.WriteLine("----------");
+            oWr.WriteLine("");
+            oWr.Flush();
+            oWr.Close();
+            oWr.Dispose();
         }
     }
 }

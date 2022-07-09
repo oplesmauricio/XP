@@ -18,7 +18,8 @@ public partial class WSViewModel : ObservableObject
     public WSViewModel(IConnectivity connectivity)
     {
         Items = new ObservableCollection<Ordem>();
-        //BorderColor = Microsoft.Maui.Graphics.Color.FromRgb(100, 0, 0);
+        BorderColorObservable = Microsoft.Maui.Graphics.Color.FromRgb(100, 0, 0);
+        BorderColorSetProperty = Microsoft.Maui.Graphics.Color.FromRgb(100, 0, 0);
         BorderColor = "Red";
         this.connectivity = connectivity;
 
@@ -27,16 +28,30 @@ public partial class WSViewModel : ObservableObject
         ConnectToServerAsync();
     }
 
-    [ObservableProperty]
-    ObservableCollection<Ordem> items;
+    //[ObservableProperty]
+    //ObservableCollection<Ordem> items;
 
     [ObservableProperty]
     //Color borderColor;
     string borderColor;
 
-    public Microsoft.Maui.Graphics.Color ShapeColorForMAUI
+    [ObservableProperty]
+    Color borderColorObservable;
+
+    private Color borderColorSetProperty;
+
+    public Color BorderColorSetProperty
     {
-        get => Microsoft.Maui.Graphics.Color.FromRgb(100, 0, 0);
+        get => borderColorSetProperty;
+        set => SetProperty(ref borderColorSetProperty, value);
+    }
+
+    private ObservableCollection<Ordem> items;
+
+    public ObservableCollection<Ordem> Items
+    {
+        get => items;
+        set => SetProperty(ref items, value);
     }
 
     [RelayCommand]
@@ -48,7 +63,7 @@ public partial class WSViewModel : ObservableObject
     [RelayCommand]
     void Delete(Ordem ordem)
     {
-        if(Items.Contains(ordem))
+        if (Items.Contains(ordem))
         {
             Items.Remove(ordem);
         }
@@ -63,50 +78,55 @@ public partial class WSViewModel : ObservableObject
     async void ConnectToServerAsync()
     {
 
-//#if __IOS__
-        await client.ConnectAsync(new Uri("ws://localhost:5002"), cts.Token);
-        //await client.ConnectAsync(new Uri("wss://demo.piesocket.com/v3/channel_1?api_key=VCXCEuvhGcBDP7XhiJJUDvR1e1D3eiVjgZ9VRiaV&notify_self"), cts.Token);
-//#else
-//      await client.ConnectAsync(new Uri("ws://10.0.2.2:5000"), cts.Token);
-//#endif
+        ////#if __IOS__
+        await client.ConnectAsync(new Uri("ws://mauricionetwork-001-site1.gtempurl.com"), cts.Token);
+        //        //await client.ConnectAsync(new Uri("wss://demo.piesocket.com/v3/channel_1?api_key=VCXCEuvhGcBDP7XhiJJUDvR1e1D3eiVjgZ9VRiaV&notify_self"), cts.Token);
+        ////#else
+        ////      await client.ConnectAsync(new Uri("ws://10.0.2.2:5000"), cts.Token);
+        ////#endif
 
 
         await Task.Factory.StartNew(async () =>
         {
-            while (true)
+            try
             {
-                WebSocketReceiveResult result;
-                var message = new ArraySegment<byte>(new byte[4096]);
-                do
+                while (true)
                 {
-                    result = await client.ReceiveAsync(message, cts.Token);
-                    var messageBytes = message.Skip(message.Offset).Take(result.Count).ToArray();
-                    //string serialisedMessae = Encoding.UTF8.GetString(messageBytes);
-
-                    try
+                    WebSocketReceiveResult result;
+                    var message = new ArraySegment<byte>(new byte[4096]);
+                    do
                     {
+                        result = await client.ReceiveAsync(message, cts.Token);
+                        var messageBytes = message.Skip(message.Offset).Take(result.Count).ToArray();
+
                         var ordens = await ByteArrayToObjectAsync(messageBytes);
+                        //Items = new ObservableCollection<Ordem>(ordens);
                         foreach (var ordem in ordens)
                         {
                             if (!Items.Contains(ordem))
                             {
-                                BorderColor = "Green";
+                                BorderColor = "Blue";
+                                BorderColorObservable = Color.FromRgb(0, 0, 255);
+                                BorderColorSetProperty = Color.FromRgb(0, 0, 255);
                                 Items.Add(ordem);
                             }
                             else
                             {
                                 BorderColor = "Red";
+                                BorderColorObservable = Color.FromRgb(255, 0, 0);
+                                BorderColorSetProperty = Color.FromRgb(255, 0, 0);
                                 Items.Remove(ordem);
                                 Items.Add(ordem);
                             }
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"Invalide message format. {ex.Message}");
-                    }
 
-                } while (!result.EndOfMessage);
+                    } while (!result.EndOfMessage);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
             }
         }, cts.Token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
     }
