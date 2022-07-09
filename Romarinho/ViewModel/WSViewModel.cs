@@ -20,20 +20,12 @@ public partial class WSViewModel : ObservableObject
         Items = new ObservableCollection<Ordem>();
         BorderColorObservable = Microsoft.Maui.Graphics.Color.FromRgb(100, 0, 0);
         BorderColorSetProperty = Microsoft.Maui.Graphics.Color.FromRgb(100, 0, 0);
-        BorderColor = "Red";
         this.connectivity = connectivity;
 
         client = new ClientWebSocket();
         cts = new CancellationTokenSource();
         ConnectToServerAsync();
     }
-
-    //[ObservableProperty]
-    //ObservableCollection<Ordem> items;
-
-    [ObservableProperty]
-    //Color borderColor;
-    string borderColor;
 
     [ObservableProperty]
     Color borderColorObservable;
@@ -77,7 +69,6 @@ public partial class WSViewModel : ObservableObject
 
     async void ConnectToServerAsync()
     {
-
         ////#if __IOS__
         await client.ConnectAsync(new Uri("ws://mauricionetwork-001-site1.gtempurl.com"), cts.Token);
         //        //await client.ConnectAsync(new Uri("wss://demo.piesocket.com/v3/channel_1?api_key=VCXCEuvhGcBDP7XhiJJUDvR1e1D3eiVjgZ9VRiaV&notify_self"), cts.Token);
@@ -85,12 +76,11 @@ public partial class WSViewModel : ObservableObject
         ////      await client.ConnectAsync(new Uri("ws://10.0.2.2:5000"), cts.Token);
         ////#endif
 
-
         await Task.Factory.StartNew(async () =>
         {
-            try
+            while (true)
             {
-                while (true)
+                try
                 {
                     WebSocketReceiveResult result;
                     var message = new ArraySegment<byte>(new byte[4096]);
@@ -100,34 +90,47 @@ public partial class WSViewModel : ObservableObject
                         var messageBytes = message.Skip(message.Offset).Take(result.Count).ToArray();
 
                         var ordens = await ByteArrayToObjectAsync(messageBytes);
-                        //Items = new ObservableCollection<Ordem>(ordens);
                         foreach (var ordem in ordens)
                         {
                             if (!Items.Contains(ordem))
                             {
-                                BorderColor = "Blue";
-                                BorderColorObservable = Color.FromRgb(0, 0, 255);
-                                BorderColorSetProperty = Color.FromRgb(0, 0, 255);
+                                ordem.GambiarraDaCor = Color.FromRgb(0, 255, 0);
+                                BorderColorObservable = Color.FromRgb(0, 255, 0);
+                                BorderColorSetProperty = Color.FromRgb(0, 255, 0);
                                 Items.Add(ordem);
                             }
                             else
                             {
-                                BorderColor = "Red";
-                                BorderColorObservable = Color.FromRgb(255, 0, 0);
-                                BorderColorSetProperty = Color.FromRgb(255, 0, 0);
+                                var ordemAtual = items.Where(m => m.Id == ordem.Id).FirstOrDefault();
+                                if (ordemAtual.Valor > ordem.Valor)
+                                {
+                                    ordem.GambiarraDaCor = Color.FromRgb(255, 0, 0);
+                                    BorderColorObservable = Color.FromRgb(255, 0, 0);
+                                    BorderColorSetProperty = Color.FromRgb(255, 0, 0);
+                                }
+                                else if (ordemAtual.Valor < ordem.Valor)
+                                {
+                                    ordem.GambiarraDaCor = Color.FromRgb(0, 0, 255);
+                                    BorderColorObservable = Color.FromRgb(0, 0, 255);
+                                    BorderColorSetProperty = Color.FromRgb(0, 0, 255);
+                                }
+                                else
+                                {
+                                    ordem.GambiarraDaCor = Color.FromRgb(255, 255, 0);
+                                    BorderColorObservable = Color.FromRgb(255, 255, 0);
+                                    BorderColorSetProperty = Color.FromRgb(255, 255, 0);
+                                }
                                 Items.Remove(ordem);
                                 Items.Add(ordem);
                             }
                         }
-
                     } while (!result.EndOfMessage);
                 }
-
+                catch (Exception ex)
+                {
+                }
             }
-            catch (Exception ex)
-            {
 
-            }
         }, cts.Token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
     }
 

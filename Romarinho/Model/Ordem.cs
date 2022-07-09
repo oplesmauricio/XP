@@ -57,6 +57,8 @@ namespace Romarinho.App.Model
         [JsonPropertyName("reducao")]
         public string Reducao { get; set; }
 
+        public Color GambiarraDaCor { get; set; }
+
         public override bool Equals(object comparavel)
         {
             if (comparavel is Ordem)
