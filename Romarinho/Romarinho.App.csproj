@@ -70,9 +70,6 @@
 		<MauiXaml Condition=" '$(EnableDefaultXamlItems)' == 'true' " Update="View\DetailPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Condition=" '$(EnableDefaultXamlItems)' == 'true' " Update="View\MainPage.xaml">
-		  <SubType>Designer</SubType>
-		</MauiXaml>
 		<MauiXaml Condition=" '$(EnableDefaultXamlItems)' == 'true' " Update="View\MinhasOrdensPage.xaml">
 		  <SubType>Designer</SubType>
 		</MauiXaml>
@@ -92,11 +89,6 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Romarinho.Infra\Romarinho.Infra.csproj" />
-	</ItemGroup>
-	<ItemGroup>
-		<Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="View\MinhasOrdensPage %28copiar%29.xaml.cs">
-			<DependentUpon>DetailPage %28copiar%29.xaml</DependentUpon>
-		</Compile>
 	</ItemGroup>
 	<PropertyGroup Condition="$(TargetFramework.Contains('-android')) and '$(Configuration)' == 'Release'">
 		<AndroidKeyStore>True</AndroidKeyStore>

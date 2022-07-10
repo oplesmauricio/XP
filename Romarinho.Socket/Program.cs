@@ -1,7 +1,5 @@
 ﻿using System.Net;
 using System.Net.WebSockets;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 using System.Text.Json;
 using Romarinho.Domain.Interfaces;
 using Romarinho.Domain.Model;
@@ -14,7 +12,6 @@ builder.Services.AddTransient(typeof(IOrdemService), typeof(OrdemService));
 
 var app = builder.Build();
 var ordemService = (OrdemService)app.Services.GetServices(typeof(IOrdemService)).FirstOrDefault();
-//var ordemService = app.Services.GetService<IOrdemService>();
 
 app.UseWebSockets();
 
