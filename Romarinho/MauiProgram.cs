@@ -34,6 +34,9 @@ public static class MauiProgram
 		builder.Services.AddTransient<WSPage>();
 		builder.Services.AddTransient<WSViewModel>();
 
+		builder.Services.AddTransient<WSMacPage>();
+		//builder.Services.AddTransient<WSViewModel>();
+
 		builder.Services.AddTransient<MinhasOrdensPage>();
 		builder.Services.AddTransient<MinhasOrdensViewModel>();
 

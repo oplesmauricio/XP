@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Romarinho.App.WSMacPage"
+             xmlns:viewmodel="clr-namespace:Romarinho.App.ViewModel"
+             Title="Book">
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="BorderColor" Value="{Binding BorderColorSetProperty}" />
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="10" />
+        </Style>
+    </ContentPage.Resources>
+    <Grid RowDefinitions="50, *, Auto"
+          ColumnDefinitions=".75*, .25*"
+          Padding="10"
+          RowSpacing="10"
+          ColumnSpacing="10">
+        <Grid
+            x:Name="grid1"
+            Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="90"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Text="DATA E HORA" />
+            <Label Grid.Column="1" Text="ASSESSOR" />
+            <Label Grid.Column="2" Text="CONTA" />
+            <Label Grid.Column="3" Text="ATIVO" />
+            <Label Grid.Column="4" Text="TIPO" />
+            <Label Grid.Column="5" Text="QTD" />
+            <Label Grid.Column="6" Text="QTD.APARENTE" />
+            <Label Grid.Column="7" Text="QTDE.DISP" />
+            <Label Grid.Column="8" Text="QTDE.CANCEL" />
+            <Label Grid.Column="9" Text="QTDE.EXEC" />
+            <Label Grid.Column="10" Text="VALOR" />
+            <Label Grid.Column="11" Text="VALOR DISP" />
+            <Label Grid.Column="12" Text="OBJETIVO" />
+            <Label Grid.Column="13" Text="OBJ.DISP" />
+            <Label Grid.Column="14" Text="REDUÇAO" />
+        </Grid>
+        <CollectionView Grid.Row="1" Grid.ColumnSpan="2"
+                        ItemsSource="{Binding Items}"
+                        SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame
+                        Padding="5"
+                        BorderColor="{Binding GambiarraDaCor}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="90"/>
+                                <ColumnDefinition Width="90"/>
+                                <ColumnDefinition Width="90"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="90"/>
+                                <ColumnDefinition Width="90"/>
+                                <ColumnDefinition Width="90"/>
+                                <ColumnDefinition Width="90"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="0" Text="{Binding Data}"/>
+                            <Label Grid.Column="1" Text="{Binding Assessor}"/>
+                            <Label Grid.Column="2" Text="{Binding Conta}"/>
+                            <Label Grid.Column="3" Text="{Binding Ativo}"/>
+                            <Label Grid.Column="4" Text="{Binding Tipo}"/>
+                            <Label Grid.Column="5" Text="{Binding Quantidade}"/>
+                            <Label Grid.Column="6" Text="{Binding QtdAparente}"/>
+                            <Label Grid.Column="7" Text="{Binding QtdDisponivel}"/>
+                            <Label Grid.Column="8" Text="{Binding QtdCancelada}"/>
+                            <Label Grid.Column="9" Text="{Binding QtdExecutada}"/>
+                            <Label Grid.Column="10" Text="{Binding Valor}"/>
+                            <Label Grid.Column="11" Text="{Binding ValorDisponivel}"/>
+                            <Label Grid.Column="12" Text="{Binding Objetivo}"/>
+                            <Label Grid.Column="13" Text="{Binding ObjDispon}"/>
+                            <Label Grid.Column="14" Text="{Binding Reducao}"/>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+        <Button Text="Minhas Ordens"
+                Command="{Binding MinhasOrdensCommand}"
+                Grid.Row="2"
+                Grid.ColumnSpan="2"/>
+
+
+    </Grid>
+
+</ContentPage>

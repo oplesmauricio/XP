@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>net6.0-android;net6.0-ios;net6.0-maccatalyst</TargetFrameworks>
@@ -67,6 +67,12 @@
 		<MauiXaml Update="View\NovaOrdemPage.xaml">
 			<SubType>
 			</SubType>
+		</MauiXaml>
+		<MauiXaml Condition=" '$(EnableDefaultXamlItems)' == 'true' " Update="WSPage %28copiar%29.xaml">
+		  <SubType>Designer</SubType>
+		</MauiXaml>
+		<MauiXaml Condition=" '$(EnableDefaultXamlItems)' == 'true' " Update="WSMacPage.xaml">
+		  <SubType>Designer</SubType>
 		</MauiXaml>
 	</ItemGroup>
 	<ItemGroup>
