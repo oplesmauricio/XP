@@ -31,4 +31,9 @@
     <Color x:Key="Blue200Accent">#72ACF1</Color>
     <Color x:Key="Blue300Accent">#A7CBF6</Color>
 
+    
+    <Color x:Key="LetraOrdem">#85825d</Color>
+    <Color x:Key="FundoOrdem">#242938</Color>
+    <Color x:Key="FundoTitulo">#2b3240</Color>
+
 </ResourceDictionary>

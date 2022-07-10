@@ -30,6 +30,12 @@ public partial class WSViewModel : ObservableObject
     [ObservableProperty]
     Color borderColorObservable;
 
+    [ObservableProperty]
+    int totalQuantidade;
+
+    [ObservableProperty]
+    int totalDisponivel;
+
     private Color borderColorSetProperty;
 
     public Color BorderColorSetProperty
@@ -94,9 +100,9 @@ public partial class WSViewModel : ObservableObject
                         {
                             if (!Items.Contains(ordem))
                             {
-                                ordem.GambiarraDaCor = Color.FromRgb(0, 255, 0);
-                                BorderColorObservable = Color.FromRgb(0, 255, 0);
-                                BorderColorSetProperty = Color.FromRgb(0, 255, 0);
+                                ordem.GambiarraDaCor = Color.FromRgb(0, 0, 255);
+                                BorderColorObservable = Color.FromRgb(0, 0, 255);
+                                BorderColorSetProperty = Color.FromRgb(0, 0, 255);
                                 Items.Add(ordem);
                             }
                             else
@@ -110,20 +116,20 @@ public partial class WSViewModel : ObservableObject
                                 }
                                 else if (ordemAtual.Valor < ordem.Valor)
                                 {
-                                    ordem.GambiarraDaCor = Color.FromRgb(0, 0, 255);
-                                    BorderColorObservable = Color.FromRgb(0, 0, 255);
-                                    BorderColorSetProperty = Color.FromRgb(0, 0, 255);
-                                }
-                                else
-                                {
                                     ordem.GambiarraDaCor = Color.FromRgb(255, 255, 0);
                                     BorderColorObservable = Color.FromRgb(255, 255, 0);
                                     BorderColorSetProperty = Color.FromRgb(255, 255, 0);
+                                }
+                                else
+                                {
+                                    ordem.GambiarraDaCor = Color.FromHex("#242938");
                                 }
                                 Items.Remove(ordem);
                                 Items.Add(ordem);
                             }
                         }
+
+                        this.TotalQuantidade = ordens.Count;
                     } while (!result.EndOfMessage);
                 }
                 catch (Exception ex)

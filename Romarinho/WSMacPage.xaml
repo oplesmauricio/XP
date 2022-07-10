@@ -3,23 +3,74 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Romarinho.App.WSMacPage"
              xmlns:viewmodel="clr-namespace:Romarinho.App.ViewModel"
-             Title="Book">
+             Title="Book"
+             BackgroundColor="#1b202d">
     <ContentPage.Resources>
         <Style TargetType="Frame">
             <Setter Property="BorderColor" Value="{Binding BorderColorSetProperty}" />
         </Style>
         <Style TargetType="Label">
-            <Setter Property="FontSize" Value="10" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="TextColor" Value="White" />
         </Style>
     </ContentPage.Resources>
-    <Grid RowDefinitions="50, *, Auto"
+    <Grid RowDefinitions="50, 40, 40, *, Auto"
           ColumnDefinitions=".75*, .25*"
           Padding="10"
-          RowSpacing="10"
-          ColumnSpacing="10">
+          RowSpacing="1">
         <Grid
-            x:Name="grid1"
-            Grid.Row="0">
+            Grid.Row="0"
+            RowDefinitions="*, 1"
+            BackgroundColor="{StaticResource FundoTitulo}"
+            HorizontalOptions="FillAndExpand"
+            Grid.ColumnSpan="2">
+            <Label
+                Grid.Row="0"
+                Text="Historico"
+                FontSize="40"/>
+            <BoxView Grid.Row="1" Grid.ColumnSpan="2" Color="White"/>
+        </Grid>
+        <Label
+            Grid.Row="1"
+            Grid.Column="0"
+            Text="Ordens am aberto"
+            FontSize="20"
+            BackgroundColor="{StaticResource FundoTitulo}"/>
+        <Grid
+            Grid.Row="1"
+            Grid.Column="1"
+            ColumnDefinitions=".40*, .10*, .40*, .10*"
+             BackgroundColor="{StaticResource FundoTitulo}">
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Text="Total Quantidade:"
+                FontSize="10"
+                VerticalTextAlignment="Center"/>
+            <Label
+                Grid.Row="1"
+                Grid.Column="1"
+                Text="{Binding TotalQuantidade}"
+                FontSize="10"
+                VerticalTextAlignment="Center"/>
+            <Label
+                Grid.Row="1"
+                Grid.Column="2"
+                Text="Total Disponivel:"
+                FontSize="10"
+                VerticalTextAlignment="Center"/>
+            <Label
+                Grid.Row="1"
+                Grid.Column="3"
+                Text="{Binding TotalDisponivel}"
+                FontSize="10"
+                VerticalTextAlignment="Center"/>
+
+
+        </Grid>
+        <Grid
+            Grid.Row="2"
+            VerticalOptions="End">
             <Grid.RowDefinitions>
                 <RowDefinition Height="20" />
             </Grid.RowDefinitions>
@@ -28,17 +79,17 @@
                 <ColumnDefinition Width="80"/>
                 <ColumnDefinition Width="50"/>
                 <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="50"/>
-                <ColumnDefinition Width="50"/>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="90"/>
-                <ColumnDefinition Width="90"/>
-                <ColumnDefinition Width="90"/>
-                <ColumnDefinition Width="50"/>
-                <ColumnDefinition Width="90"/>
-                <ColumnDefinition Width="90"/>
-                <ColumnDefinition Width="90"/>
-                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="80"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" Text="DATA E HORA" />
             <Label Grid.Column="1" Text="ASSESSOR" />
@@ -56,53 +107,51 @@
             <Label Grid.Column="13" Text="OBJ.DISP" />
             <Label Grid.Column="14" Text="REDUÇAO" />
         </Grid>
-        <CollectionView Grid.Row="1" Grid.ColumnSpan="2"
+        <CollectionView Grid.Row="3" Grid.ColumnSpan="2"
                         ItemsSource="{Binding Items}"
                         SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame
-                        Padding="5"
-                        BorderColor="{Binding GambiarraDaCor}">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="20" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="80"/>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition Width="40"/>
-                                <ColumnDefinition Width="80"/>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="90"/>
-                                <ColumnDefinition Width="90"/>
-                                <ColumnDefinition Width="90"/>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition Width="90"/>
-                                <ColumnDefinition Width="90"/>
-                                <ColumnDefinition Width="90"/>
-                                <ColumnDefinition Width="90"/>
-                            </Grid.ColumnDefinitions>
+                    <Grid BackgroundColor="#242938">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="15" />
+                            <RowDefinition Height="1" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="80"/>
+                        </Grid.ColumnDefinitions>
 
-                            <Label Grid.Column="0" Text="{Binding Data}"/>
-                            <Label Grid.Column="1" Text="{Binding Assessor}"/>
-                            <Label Grid.Column="2" Text="{Binding Conta}"/>
-                            <Label Grid.Column="3" Text="{Binding Ativo}"/>
-                            <Label Grid.Column="4" Text="{Binding Tipo}"/>
-                            <Label Grid.Column="5" Text="{Binding Quantidade}"/>
-                            <Label Grid.Column="6" Text="{Binding QtdAparente}"/>
-                            <Label Grid.Column="7" Text="{Binding QtdDisponivel}"/>
-                            <Label Grid.Column="8" Text="{Binding QtdCancelada}"/>
-                            <Label Grid.Column="9" Text="{Binding QtdExecutada}"/>
-                            <Label Grid.Column="10" Text="{Binding Valor}"/>
-                            <Label Grid.Column="11" Text="{Binding ValorDisponivel}"/>
-                            <Label Grid.Column="12" Text="{Binding Objetivo}"/>
-                            <Label Grid.Column="13" Text="{Binding ObjDispon}"/>
-                            <Label Grid.Column="14" Text="{Binding Reducao}"/>
-                        </Grid>
-                    </Frame>
+                        <Label Style="{StaticResource labelOrdem}" Grid.Column="0" Text="{Binding Data}"/>
+                        <Label Style="{StaticResource labelOrdem}" Grid.Column="1" Text="{Binding Assessor}"/>
+                        <Label Style="{StaticResource labelOrdem}" Grid.Column="2" Text="{Binding Conta}"/>
+                        <Label Style="{StaticResource labelOrdem}" Grid.Column="3" Text="{Binding Ativo}"/>
+                        <Label Style="{StaticResource labelOrdem}" Grid.Column="4" Text="{Binding Tipo}"/>
+                        <Label Style="{StaticResource labelOrdem}" Grid.Column="5" Text="{Binding Quantidade}"/>
+                        <Label Style="{StaticResource labelOrdem}" Grid.Column="6" Text="{Binding QtdAparente}"/>
+                        <Label Style="{StaticResource labelOrdem}" Grid.Column="7" Text="{Binding QtdDisponivel}"/>
+                        <Label Style="{StaticResource labelOrdem}" Grid.Column="8" Text="{Binding QtdCancelada}"/>
+                        <Label Style="{StaticResource labelOrdem}" Grid.Column="9" Text="{Binding QtdExecutada}"/>
+                        <Label Style="{StaticResource labelOrdem}" Grid.Column="10" Text="{Binding Valor}"/>
+                        <Label Style="{StaticResource labelOrdem}" Grid.Column="11" Text="{Binding ValorDisponivel}"/>
+                        <Label Style="{StaticResource labelOrdem}" Grid.Column="12" Text="{Binding Objetivo}"/>
+                        <Label Style="{StaticResource labelOrdem}" Grid.Column="13" Text="{Binding ObjDispon}"/>
+                        <Label Style="{StaticResource labelOrdem}" Grid.Column="14" Text="{Binding Reducao}"/>
+                        <BoxView Grid.Row="1" Grid.ColumnSpan="15" Color="{Binding GambiarraDaCor}"/>
+                    </Grid>
                 </DataTemplate>
 
             </CollectionView.ItemTemplate>
@@ -111,7 +160,7 @@
 
         <Button Text="Minhas Ordens"
                 Command="{Binding MinhasOrdensCommand}"
-                Grid.Row="2"
+                Grid.Row="4"
                 Grid.ColumnSpan="2"/>
 
 
