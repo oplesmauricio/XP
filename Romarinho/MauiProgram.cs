@@ -24,10 +24,6 @@ public static class MauiProgram
 		builder.Services.AddSingleton<IContexto>(new Contexto { UsuarioLogado = new Model.Usuario { Id = "1" } });
 		builder.Services.AddSingleton<ISettings>(new Settings { Token = "token"});
 
-		builder.Services.AddSingleton<MainPage>();
-		builder.Services.AddSingleton<MainViewModel>();
-
-
         builder.Services.AddTransient<EditarOrdemPage>();
         builder.Services.AddTransient<EditarOrdemViewModel>();
 
