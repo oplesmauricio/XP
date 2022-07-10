@@ -28,14 +28,13 @@ public static class MauiProgram
 		builder.Services.AddSingleton<MainViewModel>();
 
 
-        builder.Services.AddTransient<DetailPage>();
-        builder.Services.AddTransient<DetailViewModel>();
+        builder.Services.AddTransient<EditarOrdemPage>();
+        builder.Services.AddTransient<EditarOrdemViewModel>();
 
 		builder.Services.AddTransient<WSPage>();
 		builder.Services.AddTransient<WSViewModel>();
 
-		builder.Services.AddTransient<WSMacPage>();
-		//builder.Services.AddTransient<WSViewModel>();
+		builder.Services.AddTransient<WSPaisagemPage>();
 
 		builder.Services.AddTransient<MinhasOrdensPage>();
 		builder.Services.AddTransient<MinhasOrdensViewModel>();

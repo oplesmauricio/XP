@@ -17,15 +17,15 @@ services:
       dockerfile: Romarinho.Socket/Dockerfile
     ports:
       - 5002:5002
-  database:
-    image: romarinho-db
-    build:
-      context: .
-      dockerfile: DockerfileDB
-    ports:
-        - "3306:3306"
-    environment:
-        MYSQL_ROOT_PASSWORD: Romarinho
-        MYSQL_DATABASE: Romarinho
-        MYSQL_USER: MainUser
-        MYSQL_PASSWORD: MainPassword
+#  database:
+#    image: romarinho-db
+#    build:
+#      context: .
+#      dockerfile: dockerfiledb
+#    ports:
+#        - "3306:3306"
+#    environment:
+#        mysql_root_password: romarinho
+#        mysql_database: romarinho
+#        mysql_user: mainuser
+#        mysql_password: mainpassword

@@ -2,10 +2,10 @@
 
 namespace Romarinho.App;
 
-public partial class WSMacPage : ContentPage
+public partial class WSPaisagemPage : ContentPage
 {
 
-	public WSMacPage(WSViewModel vm)
+	public WSPaisagemPage(WSViewModel vm)
 	{
 		InitializeComponent();
 		BindingContext = vm;

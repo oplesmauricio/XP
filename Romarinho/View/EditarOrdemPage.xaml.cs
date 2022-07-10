@@ -2,9 +2,9 @@ using Romarinho.App.ViewModel;
 
 namespace Romarinho.App;
 
-public partial class DetailPage : ContentPage
+public partial class EditarOrdemPage : ContentPage
 {
-	public DetailPage(DetailViewModel vm)
+	public EditarOrdemPage(EditarOrdemViewModel vm)
 	{
 		InitializeComponent();
 		BindingContext = vm;

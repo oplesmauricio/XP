@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using Romarinho.App.Model;
 using Romarinho.App.Services;
+using Romarinho.App.Services.Interfaces;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Net.WebSockets;
@@ -14,30 +15,12 @@ namespace Romarinho.App.ViewModel;
 
 public partial class WSViewModel : ObservableObject
 {
-    IConnectivity connectivity;
-    public WSViewModel(IConnectivity connectivity)
-    {
-        Items = new ObservableCollection<Ordem>();
-        BorderColorObservable = Microsoft.Maui.Graphics.Color.FromRgb(100, 0, 0);
-        BorderColorSetProperty = Microsoft.Maui.Graphics.Color.FromRgb(100, 0, 0);
-        this.connectivity = connectivity;
-
-        client = new ClientWebSocket();
-        cts = new CancellationTokenSource();
-        ConnectToServerAsync();
-    }
-
-    [ObservableProperty]
-    Color borderColorObservable;
-
-    [ObservableProperty]
-    int totalQuantidade;
-
-    [ObservableProperty]
-    int totalDisponivel;
+    IConnectivity _connectivity;
+    ISettings _settings;
+    ClientWebSocket _client;
+    CancellationTokenSource _cts;
 
     private Color borderColorSetProperty;
-
     public Color BorderColorSetProperty
     {
         get => borderColorSetProperty;
@@ -45,12 +28,32 @@ public partial class WSViewModel : ObservableObject
     }
 
     private ObservableCollection<Ordem> items;
-
     public ObservableCollection<Ordem> Items
     {
         get => items;
         set => SetProperty(ref items, value);
     }
+
+    public WSViewModel(IConnectivity connectivity, ISettings settings)
+    {
+        this._connectivity = connectivity;
+        this._settings = settings;
+        this._client = new ClientWebSocket();
+        this._cts = new CancellationTokenSource();
+        this.Items = new ObservableCollection<Ordem>();
+        this.BorderColorObservable = Microsoft.Maui.Graphics.Color.FromRgb(100, 0, 0);
+        this.BorderColorSetProperty = Microsoft.Maui.Graphics.Color.FromRgb(100, 0, 0);
+        ConnectToServerAsync();
+    }
+
+    [ObservableProperty]
+    int totalQuantidade;
+
+    [ObservableProperty]
+    int totalDisponivel;
+
+    [ObservableProperty]
+    Color borderColorObservable;
 
     [RelayCommand]
     async Task MinhasOrdens()
@@ -58,31 +61,11 @@ public partial class WSViewModel : ObservableObject
         await Shell.Current.GoToAsync($"{nameof(MinhasOrdensPage)}");
     }
 
-    [RelayCommand]
-    void Delete(Ordem ordem)
-    {
-        if (Items.Contains(ordem))
-        {
-            Items.Remove(ordem);
-        }
-    }
-
-    [RelayCommand]
-    async Task Tap(Ordem ordem)
-    {
-        await Shell.Current.GoToAsync($"{nameof(DetailPage)}");
-    }
-
     async void ConnectToServerAsync()
     {
         try
         {
-            ////#if __IOS__
-            await client.ConnectAsync(new Uri("ws://mauricionetwork-001-site1.gtempurl.com"), cts.Token);
-            //        //await client.ConnectAsync(new Uri("wss://demo.piesocket.com/v3/channel_1?api_key=VCXCEuvhGcBDP7XhiJJUDvR1e1D3eiVjgZ9VRiaV&notify_self"), cts.Token);
-            ////#else
-            ////      await client.ConnectAsync(new Uri("ws://10.0.2.2:5000"), cts.Token);
-            ////#endif
+            await _client.ConnectAsync(new Uri(_settings.UrlSocket), _cts.Token);
 
             await Task.Factory.StartNew(async () =>
             {
@@ -91,7 +74,7 @@ public partial class WSViewModel : ObservableObject
                     await ReceberOrdens();
                 }
 
-            }, cts.Token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+            }, _cts.Token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
         }
         catch (Exception ex)
         {
@@ -108,7 +91,7 @@ public partial class WSViewModel : ObservableObject
             var message = new ArraySegment<byte>(new byte[4096]);
             do
             {
-                result = await client.ReceiveAsync(message, cts.Token);
+                result = await _client.ReceiveAsync(message, _cts.Token);
                 var messageBytes = message.Skip(message.Offset).Take(result.Count).ToArray();
 
                 var ordens = await ByteArrayToObjectAsync(messageBytes);
@@ -153,14 +136,10 @@ public partial class WSViewModel : ObservableObject
         }
     }
 
-    readonly ClientWebSocket client;
-    readonly CancellationTokenSource cts;
-    readonly string username;
-
-    private async Task<IEnumerable<Ordem>> ByteArrayToObjectAsync(byte[] arrBytes)
+    private async Task<IEnumerable<Ordem>> ByteArrayToObjectAsync(byte[] arrayBytes)
     {
         MemoryStream memStream = new MemoryStream();
-        memStream.Write(arrBytes, 0, arrBytes.Length);
+        memStream.Write(arrayBytes, 0, arrayBytes.Length);
         memStream.Seek(0, SeekOrigin.Begin);
         return await JsonSerializer.DeserializeAsync<IEnumerable<Ordem>>(memStream, new JsonSerializerOptions
         {

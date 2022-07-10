@@ -61,9 +61,6 @@ public partial class MinhasOrdensViewModel : ObservableObject
     [ObservableProperty]
     ObservableCollection<Ordem> minhasOrdens;
 
-    [ObservableProperty]
-    string text;
-
     [RelayCommand]
     async Task Cadastrar()
     {
@@ -110,7 +107,7 @@ public partial class MinhasOrdensViewModel : ObservableObject
         {
             { "Ordem", ordem }
         };
-        await Shell.Current.GoToAsync($"{nameof(DetailPage)}", navigationParameter);
+        await Shell.Current.GoToAsync($"{nameof(EditarOrdemPage)}", navigationParameter);
     }
 
 }

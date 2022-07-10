@@ -13,8 +13,10 @@
             <OnPlatform x:TypeArguments="DataTemplate">
                 <On Platform="iOS" Value="{DataTemplate local:WSPage}"/>
                 <On Platform="Android" Value="{DataTemplate local:WSPage}"/>
-                <On Platform="macOS" Value="{DataTemplate local:WSMacPage}"/>
-                <On Platform="MacCatalyst" Value="{DataTemplate local:WSMacPage}"/>
+                <On Platform="macOS" Value="{DataTemplate local:WSPaisagemPage}"/>
+                <On Platform="MacCatalyst" Value="{DataTemplate local:WSPaisagemPage}"/>
+                <On Platform="WinUI" Value="{DataTemplate local:WSPaisagemPage}"/>
+                <On Platform="Tizen" Value="{DataTemplate local:WSPaisagemPage}"/>
             </OnPlatform>
         </ShellContent.ContentTemplate>
     </ShellContent>

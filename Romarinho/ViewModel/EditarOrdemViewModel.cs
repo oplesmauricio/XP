@@ -7,12 +7,12 @@ using Romarinho.App.Services.Interfaces;
 namespace Romarinho.App.ViewModel;
 
 [QueryProperty("Ordem", "Ordem")]
-public partial class DetailViewModel : ObservableObject
+public partial class EditarOrdemViewModel : ObservableObject
 {
     private IConnectivity connectivity;
     private IContexto _contexto;
     private IOrdensService _service;
-    public DetailViewModel(IConnectivity connectivity, IContexto contexto, IOrdensService service)
+    public EditarOrdemViewModel(IConnectivity connectivity, IContexto contexto, IOrdensService service)
     {
         this.connectivity = connectivity;
         this._service = service;
