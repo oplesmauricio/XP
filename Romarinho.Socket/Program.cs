@@ -41,7 +41,16 @@ app.Map("/", async context =>
                 array,
                 WebSocketMessageType.Text,
                 true, CancellationToken.None);
-            await Task.Delay(1000);
+            await Task.Delay(2000);
+
+            var ordensQuaisquer = ordens.Where(m => m.IdUsuario == 2);
+
+            foreach (var ordemQualquer in ordensQuaisquer)
+            {
+                ordemQualquer.Valor = random.Next(1, 200);
+                ordemQualquer.Quantidade = random.Next(1, 200);
+                ordemService.Editar(ordemQualquer);
+            }
         }
     }
 });

@@ -70,6 +70,7 @@ public class OrdemRepository : IRepository<Ordem>
             finally
             {
                 con.Close();
+                con.Dispose();
             }
         }
     }
@@ -103,6 +104,7 @@ public class OrdemRepository : IRepository<Ordem>
             finally
             {
                 con.Close();
+                con.Dispose();
             }
         }
     }
@@ -129,6 +131,7 @@ public class OrdemRepository : IRepository<Ordem>
             finally
             {
                 con.Close();
+                con.Dispose();
             }
         }
     }
@@ -152,6 +155,7 @@ public class OrdemRepository : IRepository<Ordem>
             finally
             {
                 con.Close();
+                con.Dispose();
             }
         }
     }
@@ -175,6 +179,7 @@ public class OrdemRepository : IRepository<Ordem>
             finally
             {
                 con.Close();
+                con.Dispose();
             }
         }
     }
@@ -198,6 +203,7 @@ public class OrdemRepository : IRepository<Ordem>
             finally
             {
                 con.Close();
+                con.Dispose();
             }
         }
     }
