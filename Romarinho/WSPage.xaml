@@ -3,80 +3,131 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Romarinho.App.WSPage"
              xmlns:viewmodel="clr-namespace:Romarinho.App.ViewModel"
-             Title="Book">
+             Title="Book"
+             BackgroundColor="{StaticResource Fundo}">
     <ContentPage.Resources>
         <Style TargetType="Frame">
             <Setter Property="BorderColor" Value="{Binding BorderColorSetProperty}" />
         </Style>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="TextColor" Value="White" />
+        </Style>
     </ContentPage.Resources>
-    <Grid RowDefinitions="50, *, Auto"
-          ColumnDefinitions=".75*, .25*"
+    <Grid RowDefinitions="50, 40, 40, *, 20, Auto"
+          ColumnDefinitions=".50*, .50*"
           Padding="10"
-          RowSpacing="10"
-          ColumnSpacing="10">
+          RowSpacing="1">
         <Grid
-            x:Name="grid1"
-            Grid.Row="0">
+            Grid.Row="0"
+            RowDefinitions="*, 1"
+            BackgroundColor="{StaticResource FundoTitulo}"
+            HorizontalOptions="FillAndExpand"
+            Grid.ColumnSpan="2">
+            <Label
+                Grid.Row="0"
+                Text="Historico"
+                FontSize="40"/>
+            <BoxView Grid.Row="1" Grid.ColumnSpan="2" Color="White"/>
+        </Grid>
+        <Label
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Text="Ordens am aberto"
+            FontSize="20"
+            BackgroundColor="{StaticResource FundoTitulo}"/>
+        
+        <Grid
+            Grid.Row="2"
+            VerticalOptions="End">
             <Grid.RowDefinitions>
                 <RowDefinition Height="20" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="40"/>
                 <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="80"/>
                 <ColumnDefinition Width="50"/>
-                <ColumnDefinition Width="50"/>
-                <ColumnDefinition Width="50"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="90"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Text="Ativo" />
-            <Label Grid.Column="1" Text="Qtde" />
-            <Label Grid.Column="2" Text="Valor" />
-            <Label Grid.Column="3" Text="Assessor" />
-            <Label Grid.Column="4" Text="Tipo" />
-            <Label Grid.Column="5" Text="Data" />
+            <Label Grid.Column="0" Text="ATIVO" />
+            <Label Grid.Column="1" Text="QTD" />
+            <Label Grid.Column="2" Text="VALOR" />
+            <Label Grid.Column="3" Text="ASSESSOR" />
+            <Label Grid.Column="4" Text="CONTA" />
+            <Label Grid.Column="5" Text="DATA" />
         </Grid>
-        <CollectionView Grid.Row="1" Grid.ColumnSpan="2"
+        <CollectionView Grid.Row="3" Grid.ColumnSpan="2"
                         ItemsSource="{Binding Items}"
                         SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame
-                        Padding="5"
-                        BorderColor="{Binding GambiarraDaCor}">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="20" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            
-                            <Label Grid.Column="0" Text="{Binding Ativo}"/>
-                            <Label Grid.Column="1" Text="{Binding Quantidade}"/>
-                            <Label Grid.Column="2" Text="{Binding Valor}"/>
-                            <Label Grid.Column="3" Text="{Binding Assessor}"/>
-                            <Label Grid.Column="4" Text="{Binding Tipo}"/>
-                            <Label Grid.Column="5" Text="{Binding Data}"/>
-                        </Grid>
-                    </Frame>
+                    <Grid BackgroundColor="#242938">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="15" />
+                            <RowDefinition Height="1" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="90"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Style="{StaticResource labelOrdem}" Grid.Column="0" Text="{Binding Ativo}"/>
+                        <Label Style="{StaticResource labelOrdem}" Grid.Column="1" Text="{Binding Quantidade}"/>
+                        <Label Style="{StaticResource labelOrdem}" Grid.Column="2" Text="{Binding Valor}"/>
+                        <Label Style="{StaticResource labelOrdem}" Grid.Column="3" Text="{Binding Assessor}"/>
+                        <Label Style="{StaticResource labelOrdem}" Grid.Column="4" Text="{Binding Conta}"/>
+                        <Label Style="{StaticResource labelOrdem}" Grid.Column="5" Text="{Binding Data}"/>
+                        <BoxView Grid.Row="1" Grid.ColumnSpan="7" Color="{Binding GambiarraDaCor}"/>
+                    </Grid>
                 </DataTemplate>
 
             </CollectionView.ItemTemplate>
 
         </CollectionView>
+        <Grid
+            Grid.Row="4"
+            Grid.ColumnSpan="2"
+            ColumnDefinitions=".40*, .10*, .40*, .10*"
+             BackgroundColor="{StaticResource FundoTitulo}">
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Text="Total Quantidade:"
+                FontSize="10"
+                VerticalTextAlignment="Center"/>
+            <Label
+                Grid.Row="1"
+                Grid.Column="1"
+                Text="{Binding TotalQuantidade}"
+                FontSize="10"
+                VerticalTextAlignment="Center"/>
+            <Label
+                Grid.Row="1"
+                Grid.Column="2"
+                Text="Total Disponivel:"
+                FontSize="10"
+                VerticalTextAlignment="Center"/>
+            <Label
+                Grid.Row="1"
+                Grid.Column="3"
+                Text="{Binding TotalDisponivel}"
+                FontSize="10"
+                VerticalTextAlignment="Center"/>
 
+
+        </Grid>
         <Button Text="Minhas Ordens"
                 Command="{Binding MinhasOrdensCommand}"
-                Grid.Row="2"
+                Grid.Row="5"
                 Grid.ColumnSpan="2"/>
 
 
     </Grid>
-
 </ContentPage>

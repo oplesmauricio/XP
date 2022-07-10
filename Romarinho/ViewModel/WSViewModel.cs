@@ -75,86 +75,96 @@ public partial class WSViewModel : ObservableObject
 
     async void ConnectToServerAsync()
     {
-        ////#if __IOS__
-        await client.ConnectAsync(new Uri("ws://mauricionetwork-001-site1.gtempurl.com"), cts.Token);
-        //        //await client.ConnectAsync(new Uri("wss://demo.piesocket.com/v3/channel_1?api_key=VCXCEuvhGcBDP7XhiJJUDvR1e1D3eiVjgZ9VRiaV&notify_self"), cts.Token);
-        ////#else
-        ////      await client.ConnectAsync(new Uri("ws://10.0.2.2:5000"), cts.Token);
-        ////#endif
-
-        await Task.Factory.StartNew(async () =>
+        try
         {
-            while (true)
+            ////#if __IOS__
+            await client.ConnectAsync(new Uri("ws://mauricionetwork-001-site1.gtempurl.com"), cts.Token);
+            //        //await client.ConnectAsync(new Uri("wss://demo.piesocket.com/v3/channel_1?api_key=VCXCEuvhGcBDP7XhiJJUDvR1e1D3eiVjgZ9VRiaV&notify_self"), cts.Token);
+            ////#else
+            ////      await client.ConnectAsync(new Uri("ws://10.0.2.2:5000"), cts.Token);
+            ////#endif
+
+            await Task.Factory.StartNew(async () =>
             {
-                try
+                while (true)
                 {
-                    WebSocketReceiveResult result;
-                    var message = new ArraySegment<byte>(new byte[4096]);
-                    do
+                    await ReceberOrdens();
+                }
+
+            }, cts.Token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+        }
+        catch (Exception ex)
+        {
+            await Application.Current.MainPage.DisplayAlert("Vixi", "Tivemos um problema com servidor das ordens, tente novamente mais tarde", "Ok");
+
+        }
+    }
+
+    private async Task ReceberOrdens()
+    {
+        try
+        {
+            WebSocketReceiveResult result;
+            var message = new ArraySegment<byte>(new byte[4096]);
+            do
+            {
+                result = await client.ReceiveAsync(message, cts.Token);
+                var messageBytes = message.Skip(message.Offset).Take(result.Count).ToArray();
+
+                var ordens = await ByteArrayToObjectAsync(messageBytes);
+                foreach (var ordem in ordens)
+                {
+                    if (!Items.Contains(ordem))
                     {
-                        result = await client.ReceiveAsync(message, cts.Token);
-                        var messageBytes = message.Skip(message.Offset).Take(result.Count).ToArray();
-
-                        var ordens = await ByteArrayToObjectAsync(messageBytes);
-                        foreach (var ordem in ordens)
+                        ordem.GambiarraDaCor = Color.FromRgb(0, 0, 255);
+                        BorderColorObservable = Color.FromRgb(0, 0, 255);
+                        BorderColorSetProperty = Color.FromRgb(0, 0, 255);
+                        Items.Add(ordem);
+                    }
+                    else
+                    {
+                        var ordemAtual = items.Where(m => m.Id == ordem.Id).FirstOrDefault();
+                        if (ordemAtual.Valor > ordem.Valor)
                         {
-                            if (!Items.Contains(ordem))
-                            {
-                                ordem.GambiarraDaCor = Color.FromRgb(0, 0, 255);
-                                BorderColorObservable = Color.FromRgb(0, 0, 255);
-                                BorderColorSetProperty = Color.FromRgb(0, 0, 255);
-                                Items.Add(ordem);
-                            }
-                            else
-                            {
-                                var ordemAtual = items.Where(m => m.Id == ordem.Id).FirstOrDefault();
-                                if (ordemAtual.Valor > ordem.Valor)
-                                {
-                                    ordem.GambiarraDaCor = Color.FromRgb(255, 0, 0);
-                                    BorderColorObservable = Color.FromRgb(255, 0, 0);
-                                    BorderColorSetProperty = Color.FromRgb(255, 0, 0);
-                                }
-                                else if (ordemAtual.Valor < ordem.Valor)
-                                {
-                                    ordem.GambiarraDaCor = Color.FromRgb(255, 255, 0);
-                                    BorderColorObservable = Color.FromRgb(255, 255, 0);
-                                    BorderColorSetProperty = Color.FromRgb(255, 255, 0);
-                                }
-                                else
-                                {
-                                    ordem.GambiarraDaCor = Color.FromHex("#242938");
-                                }
-                                Items.Remove(ordem);
-                                Items.Add(ordem);
-                            }
+                            ordem.GambiarraDaCor = Color.FromRgb(255, 0, 0);
+                            BorderColorObservable = Color.FromRgb(255, 0, 0);
+                            BorderColorSetProperty = Color.FromRgb(255, 0, 0);
                         }
-
-                        this.TotalQuantidade = ordens.Count;
-                    } while (!result.EndOfMessage);
+                        else if (ordemAtual.Valor < ordem.Valor)
+                        {
+                            ordem.GambiarraDaCor = Color.FromRgb(255, 255, 0);
+                            BorderColorObservable = Color.FromRgb(255, 255, 0);
+                            BorderColorSetProperty = Color.FromRgb(255, 255, 0);
+                        }
+                        else
+                        {
+                            ordem.GambiarraDaCor = Color.FromHex("#242938");
+                        }
+                        Items.Remove(ordem);
+                        Items.Add(ordem);
+                    }
                 }
-                catch (Exception ex)
-                {
-                }
-            }
 
-        }, cts.Token, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+                this.TotalQuantidade = ordens.Count();
+            } while (!result.EndOfMessage);
+        }
+        catch (Exception ex)
+        {
+        }
     }
 
     readonly ClientWebSocket client;
     readonly CancellationTokenSource cts;
     readonly string username;
 
-    private async Task<List<Ordem>> ByteArrayToObjectAsync(byte[] arrBytes)
+    private async Task<IEnumerable<Ordem>> ByteArrayToObjectAsync(byte[] arrBytes)
     {
         MemoryStream memStream = new MemoryStream();
-        //BinaryFormatter binForm = new BinaryFormatter();
         memStream.Write(arrBytes, 0, arrBytes.Length);
         memStream.Seek(0, SeekOrigin.Begin);
-        return await JsonSerializer.DeserializeAsync<List<Ordem>>(memStream, new JsonSerializerOptions
+        return await JsonSerializer.DeserializeAsync<IEnumerable<Ordem>>(memStream, new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true,
         });
-
-        //return obj;
     }
 }

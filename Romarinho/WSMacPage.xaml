@@ -4,7 +4,7 @@
              x:Class="Romarinho.App.WSMacPage"
              xmlns:viewmodel="clr-namespace:Romarinho.App.ViewModel"
              Title="Book"
-             BackgroundColor="#1b202d">
+             BackgroundColor="{StaticResource Fundo}">
     <ContentPage.Resources>
         <Style TargetType="Frame">
             <Setter Property="BorderColor" Value="{Binding BorderColorSetProperty}" />
