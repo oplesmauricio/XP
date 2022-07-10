@@ -52,33 +52,41 @@
 		<MauiXaml Condition=" '$(EnableDefaultXamlItems)' == 'true' " Update="MainPage %28copiar%29.xaml">
 			<SubType>Designer</SubType>
 		</MauiXaml>
-		<MauiXaml Condition=" '$(EnableDefaultXamlItems)' == 'true' " Update="WSPage.xaml">
-			<SubType>Designer</SubType>
-		</MauiXaml>
 		<MauiXaml Condition=" '$(EnableDefaultXamlItems)' == 'true' " Update="VIew\MainPage %28copiar%29.xaml">
 			<SubType>Designer</SubType>
 		</MauiXaml>
-		<MauiXaml Condition=" '$(EnableDefaultXamlItems)' == 'true' " Update="VIew\MinhasOrdensPage.xaml">
-			<SubType>Designer</SubType>
-		</MauiXaml>
-		<MauiXaml Condition=" '$(EnableDefaultXamlItems)' == 'true' " Update="VIew\DetailPage.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
 		<MauiXaml Update="View\NovaOrdemPage.xaml">
-			<SubType>
-			</SubType>
+			<SubType>Designer</SubType>
 		</MauiXaml>
 		<MauiXaml Condition=" '$(EnableDefaultXamlItems)' == 'true' " Update="WSPage %28copiar%29.xaml">
 		  <SubType>Designer</SubType>
 		</MauiXaml>
-		<MauiXaml Condition=" '$(EnableDefaultXamlItems)' == 'true' " Update="WSMacPage.xaml">
+		<MauiXaml Condition=" '$(EnableDefaultXamlItems)' == 'true' " Update="MinhasOrdensPage.xaml">
+		  <SubType>Designer</SubType>
+		</MauiXaml>
+		<MauiXaml Condition=" '$(EnableDefaultXamlItems)' == 'true' " Update="NovaOrdemPage.xaml">
+		  <SubType>Designer</SubType>
+		</MauiXaml>
+		<MauiXaml Condition=" '$(EnableDefaultXamlItems)' == 'true' " Update="View\DetailPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Condition=" '$(EnableDefaultXamlItems)' == 'true' " Update="View\MainPage.xaml">
+		  <SubType>Designer</SubType>
+		</MauiXaml>
+		<MauiXaml Condition=" '$(EnableDefaultXamlItems)' == 'true' " Update="View\MinhasOrdensPage.xaml">
+		  <SubType>Designer</SubType>
+		</MauiXaml>
+		<MauiXaml Condition=" '$(EnableDefaultXamlItems)' == 'true' " Update="View\WSMacPage.xaml">
+		  <SubType>Designer</SubType>
+		</MauiXaml>
+		<MauiXaml Condition=" '$(EnableDefaultXamlItems)' == 'true' " Update="View\WSPage.xaml">
 		  <SubType>Designer</SubType>
 		</MauiXaml>
 	</ItemGroup>
 	<ItemGroup>
 		<Folder Include="Services\" />
 		<Folder Include="Model\" />
-		<Folder Include="VIew\" />
+		<Folder Include="View\" />
 		<Folder Include="Model\Interfaces\" />
 		<Folder Include="Services\Interfaces\" />
 	</ItemGroup>
