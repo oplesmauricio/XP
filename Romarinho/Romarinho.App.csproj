@@ -79,6 +79,9 @@
 		<MauiXaml Condition=" '$(EnableDefaultXamlItems)' == 'true' " Update="View\WSPage.xaml">
 		  <SubType>Designer</SubType>
 		</MauiXaml>
+		<MauiXaml Condition=" '$(EnableDefaultXamlItems)' == 'true' " Update="View\WSPaisagemPage.xaml">
+		  <SubType>Designer</SubType>
+		</MauiXaml>
 	</ItemGroup>
 	<ItemGroup>
 		<Folder Include="Services\" />
@@ -89,6 +92,16 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Romarinho.Infra\Romarinho.Infra.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="View\WSPage.xaml.cs">
+	    <DependentUpon>WSPage.xaml</DependentUpon>
+	    <SubType>Code</SubType>
+	  </Compile>
+	  <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="View\WSPaisagemPage.xaml.cs">
+	    <DependentUpon>WSPaisagemPage.xaml</DependentUpon>
+	    <SubType>Code</SubType>
+	  </Compile>
 	</ItemGroup>
 	<PropertyGroup Condition="$(TargetFramework.Contains('-android')) and '$(Configuration)' == 'Release'">
 		<AndroidKeyStore>True</AndroidKeyStore>
