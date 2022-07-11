@@ -12,7 +12,7 @@ namespace Romarinho.Core
     {
         private static readonly string PasswordHash = "Romarinho";
         private static readonly string SaltKey = "Romarinho";
-        private static readonly string VIKey = "Romarinho";
+        private static readonly string VIKey = "I=ZXz]n'n{q{'H#m";
 
         public static string Encrypt(string plainText)
         {
