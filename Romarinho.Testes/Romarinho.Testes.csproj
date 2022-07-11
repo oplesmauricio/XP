@@ -29,6 +29,7 @@
     <ProjectReference Include="..\Romarinho.Domain\Romarinho.Domain.csproj" />
     <ProjectReference Include="..\Romarinho.Repository\Romarinho.Repository.csproj" />
     <ProjectReference Include="..\Romarinho.Infra\Romarinho.Infra.csproj" />
+    <ProjectReference Include="..\Romarinho.Core\Romarinho.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Moq" />
