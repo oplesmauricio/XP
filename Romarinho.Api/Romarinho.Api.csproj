@@ -18,6 +18,9 @@
     <ProjectReference Include="..\Romarinho.Application\Romarinho.Application.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+    <ProjectReference Include="..\Romarinho.Core\Romarinho.Core.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Remove="DTOs\" />

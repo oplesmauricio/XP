@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Romarinho.Api.DTOs;
 using Romarinho.Domain.Model;
@@ -6,6 +7,7 @@ using Romarinho.Domain.Services;
 
 namespace Romarinho.Api.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("[controller]")]
 public class OrdemController : ControllerBase

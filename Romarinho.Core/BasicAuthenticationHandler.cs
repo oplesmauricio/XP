@@ -31,16 +31,17 @@ namespace Romarinho.Core
             try
             {
                 var authHeader = AuthenticationHeaderValue.Parse(Request.Headers["Authorization"]);
-                var token = Encoding.UTF8.GetString(Convert.FromBase64String(authHeader.Parameter));
+                var auth = Encoding.UTF8.GetString(Convert.FromBase64String(authHeader.Parameter));
+                var token = auth.Split(':')[0];
 
-                //validacao de token aqui
-                if (false)
+                //Chamamos servico de validacao de token
+                if (token == "token")
                 {
-                    return AuthenticateResult.Fail("Token Invalido");
+                    usuario = token;
                 }
                 else
                 {
-                    usuario = token;
+                    return AuthenticateResult.Fail("Token Invalido");
                 }
             }
             catch (Exception ex)

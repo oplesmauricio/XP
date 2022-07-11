@@ -1,7 +1,9 @@
 ﻿using System;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication;
 using Romarinho.Api.DTOs;
 using Romarinho.Application;
+using Romarinho.Core;
 using Romarinho.Domain.Model;
 
 namespace Romarinho.Api
@@ -33,6 +35,9 @@ namespace Romarinho.Api
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
+
+            services.AddAuthentication("BasicAuthentication")
+                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +54,7 @@ namespace Romarinho.Api
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
