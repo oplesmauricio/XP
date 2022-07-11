@@ -1,7 +1,4 @@
-﻿using Moq;
-using Romarinho.Core;
-using Romarinho.Domain.Model;
-using Romarinho.Infra;
+﻿using Romarinho.Core;
 
 namespace Romarinho.Testes;
 

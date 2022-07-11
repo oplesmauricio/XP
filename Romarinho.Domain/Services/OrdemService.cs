@@ -34,7 +34,7 @@ namespace Romarinho.Domain.Services
             ordem.QtdExecutada = 0;
             ordem.Reducao = "";
             ordem.ValorDisponivel = ordem.Valor;
-            ordem.Tipo = "COMPRA";
+            ordem.Tipo = "C";
             ordem.IdUsuario = 1;
         }
 
